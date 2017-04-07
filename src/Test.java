@@ -20,6 +20,8 @@ public class Test
 
         algorithm = new GeneticAlgorithmBuilder(b, co, bf).build();
 
+
+
         AlgorithmRunner algRun = new AlgorithmRunner.Executor(algorithm).execute();
 
         System.out.println(algorithm.getResult());
