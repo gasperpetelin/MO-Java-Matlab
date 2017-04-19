@@ -2,20 +2,19 @@ package ExternalProblems.MatlabImplementations;
 
 
 import CommunicationManager.ICommandManager;
+import CommunicationManager.IEvaluators.ISolutionEvaluation;
+import CommunicationManager.Implementations.BinaryMatlabCommandManager;
+import CommunicationManager.Implementations.ConstraintEvaluation;
+import CommunicationManager.CommandManager;
+import CommunicationManager.IEvaluators.IConstrainEvaluation;
 import ExternalProblems.Abstractions.AbstractExternalBinaryProblem;
-import MatlabVariableTransformations.AbstractMatlabVariables;
-import MatlabVariableTransformations.Implementations.ArrayFunctionArgument;
-import MatlabVariableTransformations.Implementations.DoubleFunctionArgument;
 import MatlabVariableTransformations.Implementations.IntFunctionArgument;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabInvocationException;
 import org.uma.jmetal.problem.ConstrainedProblem;
 import org.uma.jmetal.solution.BinarySolution;
-import org.uma.jmetal.util.JMetalException;
 import org.uma.jmetal.util.solutionattribute.impl.NumberOfViolatedConstraints;
 import org.uma.jmetal.util.solutionattribute.impl.OverallConstraintViolation;
-
-import java.util.List;
 
 public class ConstrainedExternamBinaryProblem extends AbstractExternalBinaryProblem implements ConstrainedProblem<BinarySolution>
 {
@@ -23,16 +22,16 @@ public class ConstrainedExternamBinaryProblem extends AbstractExternalBinaryProb
     public OverallConstraintViolation<BinarySolution> overallConstraintViolationDegree ;
     public NumberOfViolatedConstraints<BinarySolution> numberOfViolatedConstraints ;
 
-    public ConstrainedExternamBinaryProblem(ICommandManager manager, String matlabVariableName,
-           int numberOfVariables, int numberOfObjectives, String problemName, String bitsPerVariableName) throws IllegalAccessException, InstantiationException, MatlabInvocationException, MatlabConnectionException
+    IConstrainEvaluation<BinarySolution> evaluator;
+
+    public ConstrainedExternamBinaryProblem(IConstrainEvaluation<BinarySolution> evaluator,
+           int numberOfVariables, int numberOfObjectives, String problemName, int numberOfBits) throws IllegalAccessException, InstantiationException, MatlabInvocationException, MatlabConnectionException
     {
-        super(manager, matlabVariableName);
-        this.numberOfBits = manager.getVariable(matlabVariableName + "." + bitsPerVariableName, IntFunctionArgument.class).getValue();
+        super(numberOfBits, problemName);
 
-
+        this.evaluator = evaluator;
         setNumberOfVariables(numberOfVariables);
         setNumberOfObjectives(numberOfObjectives);
-        setName(problemName);
 
         overallConstraintViolationDegree = new OverallConstraintViolation<>() ;
         numberOfViolatedConstraints = new NumberOfViolatedConstraints<>() ;
@@ -47,48 +46,18 @@ public class ConstrainedExternamBinaryProblem extends AbstractExternalBinaryProb
     @Override
     public void evaluate(BinarySolution s)
     {
-        String functionArgument = MatlabMatrixBuilder(s);
-        String command = this.nameOfObjectVariable + ".evaluate(" + functionArgument + ")";
-
-        try
+        double[] ev = evaluator.getSolution(s);
+        for (int i = 0; i < ev.length; i++)
         {
-            manager.executeCommand("testV =" +command+";");
-            List<AbstractMatlabVariables> af = manager.getVariable("testV", ArrayFunctionArgument.class).getValue();
-            for (int i = 0; i < s.getNumberOfObjectives(); i++)
-            {
-                DoubleFunctionArgument a = (DoubleFunctionArgument)af.get(i);
-                s.setObjective(i, a.getValue());
-            }
-
-        }
-        catch (Exception ex)
-        {
-            JMetalException newex = new JMetalException("Error with session.", ex);
-            throw newex;
+            s.setObjective(i, ev[i]);
         }
     }
 
     @Override
     public void evaluateConstraints(BinarySolution s)
     {
-        String functionArgument = MatlabMatrixBuilder(s);
-        String command = this.nameOfObjectVariable + ".evaluateConstraints(" + functionArgument + ")";
-
-        try
-        {
-            manager.executeCommand("testV =" +command+";");
-            List<AbstractMatlabVariables> af = manager.getVariable("testV", ArrayFunctionArgument.class).getValue();
-            for (int i = 0; i < s.getNumberOfObjectives(); i++)
-            {
-                DoubleFunctionArgument a = (DoubleFunctionArgument)af.get(i);
-                s.setObjective(i, a.getValue());
-            }
-
-        }
-        catch (Exception ex)
-        {
-            JMetalException newex = new JMetalException("Error with session.", ex);
-            throw newex;
-        }
+        ConstraintEvaluation ev =  evaluator.getConstraint(s);
+        this.overallConstraintViolationDegree.setAttribute(s, ev.getOverallConstraintViolationDegree());
+        this.numberOfViolatedConstraints.setAttribute(s, ev.getNumberOfViolatedConstraints());
     }
 }

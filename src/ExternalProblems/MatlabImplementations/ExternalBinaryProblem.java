@@ -1,33 +1,28 @@
 package ExternalProblems.MatlabImplementations;
 
+import CommunicationManager.CommandManager;
 import CommunicationManager.ICommandManager;
+import CommunicationManager.IEvaluators.ISolutionEvaluation;
 import ExternalProblems.Abstractions.AbstractExternalBinaryProblem;
-import MatlabVariableTransformations.AbstractMatlabVariables;
-import MatlabVariableTransformations.Implementations.ArrayFunctionArgument;
-import MatlabVariableTransformations.Implementations.DoubleFunctionArgument;
 import MatlabVariableTransformations.Implementations.IntFunctionArgument;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabInvocationException;
 import org.uma.jmetal.solution.BinarySolution;
-import org.uma.jmetal.util.JMetalException;
-
-import java.util.List;
 
 
 public class ExternalBinaryProblem extends AbstractExternalBinaryProblem
 {
 
+    ISolutionEvaluation<BinarySolution> evaluator;
 
-    public ExternalBinaryProblem(ICommandManager manager, String matlabVariableName,
-           int numberOfVariables, int numberOfObjectives, String problemName, String bitsPerVariableName) throws IllegalAccessException, InstantiationException, MatlabInvocationException, MatlabConnectionException
+    public ExternalBinaryProblem(ISolutionEvaluation<BinarySolution> evaluator,
+                                 int numberOfVariables, int numberOfObjectives, String problemName, int bitsPerVariable) throws IllegalAccessException, InstantiationException, MatlabInvocationException, MatlabConnectionException
     {
-        super(manager, matlabVariableName);
-        this.numberOfBits = manager.getVariable(matlabVariableName + "." + bitsPerVariableName, IntFunctionArgument.class).getValue();
-
+        super(bitsPerVariable, problemName);
+        this.evaluator = evaluator;
 
         setNumberOfVariables(numberOfVariables);
         setNumberOfObjectives(numberOfObjectives);
-        setName(problemName);
     }
 
     @Override
@@ -39,24 +34,11 @@ public class ExternalBinaryProblem extends AbstractExternalBinaryProblem
     @Override
     public void evaluate(BinarySolution s)
     {
-        String functionArgument = MatlabMatrixBuilder(s);
-        String command = this.nameOfObjectVariable + ".evaluate(" + functionArgument + ")";
-
-        try
+        double[] objectives = evaluator.getSolution(s);
+        for (int i = 0; i < objectives.length; i++)
         {
-            manager.executeCommand("testV =" +command+";");
-            List<AbstractMatlabVariables> af = manager.getVariable("testV", ArrayFunctionArgument.class).getValue();
-            for (int i = 0; i < s.getNumberOfObjectives(); i++)
-            {
-                DoubleFunctionArgument a = (DoubleFunctionArgument)af.get(i);
-                s.setObjective(i, a.getValue());
-            }
+            s.setObjective(i, objectives[i]);
+        }
 
-        }
-        catch (Exception ex)
-        {
-            JMetalException newex = new JMetalException("Error with session.", ex);
-            throw newex;
-        }
     }
 }

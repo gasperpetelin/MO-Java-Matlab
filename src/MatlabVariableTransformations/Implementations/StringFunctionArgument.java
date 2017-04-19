@@ -19,9 +19,4 @@ public class StringFunctionArgument extends AbstractMatlabVariables<String>
         this.value = value.toString();
     }
 
-    @Override
-    public String getValue()
-    {
-        return this.value;
-    }
 }

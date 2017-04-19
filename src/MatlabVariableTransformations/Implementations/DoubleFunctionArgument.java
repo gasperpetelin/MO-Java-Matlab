@@ -21,9 +21,4 @@ public class DoubleFunctionArgument extends AbstractMatlabVariables<Double>
         this.value = ((double[]) value)[0];
     }
 
-    @Override
-    public Double getValue()
-    {
-        return this.value;
-    }
 }

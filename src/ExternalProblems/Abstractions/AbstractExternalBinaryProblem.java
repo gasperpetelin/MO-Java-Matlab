@@ -1,36 +1,24 @@
 package ExternalProblems.Abstractions;
 
-import CommunicationManager.ICommandManager;
+import MatlabVariableTransformations.Implementations.StringFunctionArgument;
 import org.uma.jmetal.problem.BinaryProblem;
 import org.uma.jmetal.solution.BinarySolution;
 import org.uma.jmetal.solution.impl.DefaultBinarySolution;
 
-public abstract class AbstractExternalBinaryProblem extends AbstractExternalGenericProblem<BinarySolution> implements BinaryProblem
+public abstract class AbstractExternalBinaryProblem extends org.uma.jmetal.problem.impl.AbstractGenericProblem<BinarySolution> implements BinaryProblem
 {
-
+    public AbstractExternalBinaryProblem(int numberOfBits, String problemName)
+    {
+        this.numberOfBits = numberOfBits;
+        this.setName(problemName);
+    }
 
     protected int numberOfBits;
 
-    public AbstractExternalBinaryProblem(ICommandManager manager, String nameOfObjectVariable)
-    {
-        super(manager, nameOfObjectVariable);
-    }
-
     protected abstract int getBitsPerVariable(int var1);
 
-    protected String MatlabMatrixBuilder(BinarySolution s)
+    public int getNumberOfBits(int index)
     {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-        for (int i = 0; i < s.getNumberOfVariables(); i++)
-        {
-            builder.append("[" +s.getVariableValueString(i).replace("", " ").trim()+"];");
-        }
-        builder.append("]");
-        return builder.toString();
-    }
-
-    public int getNumberOfBits(int index) {
         return this.getBitsPerVariable(index);
     }
 
@@ -44,7 +32,8 @@ public abstract class AbstractExternalBinaryProblem extends AbstractExternalGene
         return count;
     }
 
-    public BinarySolution createSolution() {
+    public BinarySolution createSolution()
+    {
         return new DefaultBinarySolution(this);
     }
 }

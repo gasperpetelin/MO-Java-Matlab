@@ -1,13 +1,13 @@
 package ExternalProblems.ProblemBuilders.Abstractions;
 
 import CommunicationManager.ICommandManager;
-import ExternalProblems.Abstractions.AbstractExternalGenericProblem;
 import ExternalProblems.ProblemBuilders.Implementations.FluentArrayBuilder;
 import MatlabVariableTransformations.AbstractMatlabVariables;
 import MatlabVariableTransformations.Implementations.DoubleFunctionArgument;
 import MatlabVariableTransformations.Implementations.IntFunctionArgument;
 import matlabcontrol.MatlabConnectionException;
 import matlabcontrol.MatlabInvocationException;
+import org.uma.jmetal.problem.impl.AbstractGenericProblem;
 
 import javax.management.JMException;
 import java.util.ArrayList;
@@ -19,21 +19,18 @@ public abstract class MatlabAbstractProblemBuilder<T extends MatlabAbstractProbl
     protected String problemName;
     protected ICommandManager manager;
 
-    protected String numberOfVariablesDefaultField = "NumberOfVariables";
-    protected String numberOfObjectivesDefaultField = "NumberOfObjectives";
-    protected String nameDefaultField = "Name";
-    protected String nameOfCreatedVariable = "createdVariableName";
+    protected int numberofVariables = 0;
 
     protected List<AbstractMatlabVariables> functionArguments = new ArrayList<AbstractMatlabVariables>();
 
-    protected int getNumberOfVariables() throws MatlabConnectionException, InstantiationException, IllegalAccessException, MatlabInvocationException
+    protected int getNumberOfVariables()
     {
-        return manager.getVariable(nameOfCreatedVariable + "." + numberOfVariablesDefaultField, IntFunctionArgument.class).getValue();
+        return manager.getNumberOfVariables();
     }
 
-    protected int getNumberOfObjectives() throws MatlabConnectionException, InstantiationException, IllegalAccessException, MatlabInvocationException
+    protected int getNumberOfObjectives()
     {
-        return manager.getVariable(nameOfCreatedVariable + "." + numberOfObjectivesDefaultField, IntFunctionArgument.class).getValue();
+        return manager.getNumberOfObjectives();
     }
 
     public MatlabAbstractProblemBuilder(String problemName, ICommandManager manager)
@@ -42,27 +39,40 @@ public abstract class MatlabAbstractProblemBuilder<T extends MatlabAbstractProbl
         this.manager = manager;
     }
 
+    public T setEvaluationFunctionName(String name)
+    {
+        this.manager.setEvaluateFunctionName(name);
+        return (T)this;
+    }
+
+    public T setEvaluateConstraintsFunctionName(String name)
+    {
+        this.manager.setEvaluateConstraintsFunctionName(name);
+        return (T)this;
+    }
+
     public T setNumberOfVariablesDefaultFieldName(String numberOfVariablesDefaultField)
     {
-        this.numberOfVariablesDefaultField = numberOfVariablesDefaultField;
+        this.manager.setNumberOfVariablesFieldName(numberOfVariablesDefaultField);
         return (T)this;
     }
 
     public T setNumberOfObjectivesDefaultFieldeName(String numberOfObjectivesDefaultFielde)
     {
-        this.numberOfObjectivesDefaultField = numberOfObjectivesDefaultFielde;
+        this.manager.setNumberOfObjectivesFieldName(numberOfObjectivesDefaultFielde);
         return (T)this;
     }
 
     public T setNameDefaultFieldName(String nameDefaultField)
     {
-        this.nameDefaultField = nameDefaultField;
+        this.manager.setProblemNameFieldName(nameDefaultField);
         return (T)this;
     }
 
-    public T setNameOfMAtlabVariable(String name)
+    public T setNameOfMatlabVariable(String name)
     {
-        this.nameOfCreatedVariable = name;
+        //this.nameOfCreatedVariable = name;
+        manager.setObjectName(name);
         return (T)this;
     }
 
@@ -109,6 +119,6 @@ public abstract class MatlabAbstractProblemBuilder<T extends MatlabAbstractProbl
         return new FluentArrayBuilder(this);
     }
 
-    public abstract AbstractExternalGenericProblem build() throws MatlabConnectionException, MatlabInvocationException, InstantiationException, IllegalAccessException, JMException;
+    public abstract AbstractGenericProblem build() throws MatlabConnectionException, MatlabInvocationException, InstantiationException, IllegalAccessException, JMException;
 
 }

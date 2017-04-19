@@ -15,11 +15,14 @@ public abstract class AbstractMatlabVariables<T>
         this.value = value;
     }
     public abstract void setMatlabValue(Object value);
-    public abstract T getValue();
+    public T getValue()
+    {
+        return this.value;
+    }
     public String toMatlabStructure()
     {
         if(this.value==null)
-            throw new JMetalException("argument is null");
+            throw new JMetalException("Argument is null");
         return this.value.toString();
     }
 }

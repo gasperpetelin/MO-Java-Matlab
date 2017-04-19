@@ -46,11 +46,5 @@ public class ArrayFunctionArgument extends AbstractMatlabVariables<List<Abstract
     }
 
 
-    @Override
-    public List<AbstractMatlabVariables> getValue()
-    {
-        return this.value;
-    }
-
 
 }

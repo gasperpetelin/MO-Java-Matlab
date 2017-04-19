@@ -1,5 +1,6 @@
 package CommunicationManager;
 
+import CommunicationManager.Implementations.DoubleMatlabCommandManager;
 import matlabcontrol.MatlabConnectionException;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ class MatlabCommandManagerTest
     @Test
     void createVariable() throws MatlabConnectionException
     {
-        ICommandManager m = MatlabCommandManager.newInstance();
+        CommandManager m = DoubleMatlabCommandManager.newInstance();
         m.openSession();
         //m.executeCommand("h = [12,4]");
         assertEquals(true, true);

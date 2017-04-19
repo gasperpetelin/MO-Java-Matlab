@@ -21,9 +21,4 @@ public class IntFunctionArgument extends AbstractMatlabVariables<Integer>
         this.value = d.intValue();
     }
 
-    @Override
-    public Integer getValue()
-    {
-        return this.value;
-    }
 }
