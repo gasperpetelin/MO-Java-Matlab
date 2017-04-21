@@ -55,7 +55,8 @@ public class main
         DoubleMatlabManager manager = new DoubleMatlabManager(conf);
 
         manager.openSession();
-        manager.setPath("C:\\Users\\gasper\\Desktop\\jMetalMatlabWrapper\\matlabscripts");
+
+        manager.setPath("matlabscripts");
         DoubleProblemBuilder builder = new DoubleProblemBuilder(manager, "ZagonTest");
         ExternalDoubleProblem p = builder.build();
         Algorithm<DoubleSolution> algorithm1 = new NSGAII(p, 600, 20,
@@ -66,6 +67,7 @@ public class main
                 .execute();
         System.out.println(algorithm1.getResult());
         System.out.println(p.getName());
+
         manager.closeSession();
     }
 
