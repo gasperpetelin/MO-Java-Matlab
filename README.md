@@ -1,5 +1,7 @@
 # jMetal problem evaluation in Matlab
 
+Primer klica datoteke ZagonTest
+
 ```java
 DoubleSolutionMatlabManagerConfig conf = new DoubleSolutionMatlabManagerConfig();
 DoubleMatlabManager manager = new DoubleMatlabManager(conf);
@@ -19,6 +21,28 @@ System.out.println(algorithm.getResult());
 System.out.println(algorithmRunner.getComputingTime());
 
 manager.closeSession();
+```
 
-manager.closeSession();
+Datoteka ZagonTest
+
+```matlab
+classdef ZagonTest
+   properties
+      NumberOfVariables = 6
+      NumberOfObjectives = 10
+      Name = 'Zagon'
+      Limits=[[-100,100];[-100,100];[-100,100];[-100,100];[-100,100];[-100,100]];
+   end
+   methods
+
+      function obj = ZagonTest()
+      end
+      
+      function o = evaluate(obj, solution)
+        global vhod;
+        vhod = solution;
+        o = zagon(vhod);
+      end
+   end
+end
 ```
