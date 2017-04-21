@@ -4,7 +4,7 @@ classdef Binh
       NumberOfObjectives = 2
       NumberOfConstraints = 2
       Name = 'Binh problem'
-      Limits = [[0, 5];[0, 3];];
+      lims = [[0, 5];[0, 3];];
 
    end
    methods

@@ -16,6 +16,7 @@ classdef Knapsack
       end
       
       function o = evaluate(obj, solution)
+        %solution = solution(:, 1);
         o(1) = -sum(solution'.*obj.Elements);
         o(2) = sum(solution);
         if(o(1)<-obj.Size)

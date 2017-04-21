@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/jMetalTest.iml" filepath="$PROJECT_DIR$/jMetalTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jMetalMatlabWrapper.iml" filepath="$PROJECT_DIR$/jMetalMatlabWrapper.iml" />
     </modules>
   </component>
 </project>
