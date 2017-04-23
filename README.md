@@ -100,6 +100,38 @@ classdef ZagonTest
 end
 ```
 
+### Knapsack
+Prikaz reševanja probleman Knapsack, kjer z razredom ProblemBuilder zgradimo potrebne
+argumente za delovanje problema (velikost koša in elemente, ki jih zlagamo v koš) in 
+jih pošljemo v konstruktor razreda
+
+```java
+BinarySolutionMatlabManagerConfig conf = new BinarySolutionMatlabManagerConfig();
+BinaryMatlabManager manager = new BinaryMatlabManager(conf);
+manager.openSession();
+manager.setPath("C:\\Users\\gasper\\Desktop\\jMetalMatlabWrapper\\matlabscripts");
+BinaryProblemBuilder builder = new BinaryProblemBuilder(manager, "Knapsack")
+        .startArray()
+            .addValue(5)
+            .addValue(3)
+            .addValue(7)
+            .addValue(2)
+            .addValue(3)
+            .addValue(3)
+        .stopArray()
+        .addValue(11);
+ExternalBinaryProblem p = builder.build();
+Algorithm<BinarySolution> algorithm1 = new NSGAII(p, 600, 20,
+        new SinglePointCrossover(0.5),
+        new BitFlipMutation(0.5),
+        new BinaryTournamentSelection(new RankingAndCrowdingDistanceComparator()), new SequentialSolutionListEvaluator());
+AlgorithmRunner algorithmRunner1 = new AlgorithmRunner.Executor(algorithm1).execute();
+System.out.println(algorithm1.getResult());
+System.out.println(p.getName());
+manager.closeSession();
+```
+
+Matlab razred Knapsack, ki izračuna kvaliteto rešitve.
 
 ```Matlab
 classdef Knapsack
