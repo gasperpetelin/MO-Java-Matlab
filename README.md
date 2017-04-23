@@ -3,12 +3,22 @@
 ### ZagonTest
 Primer klica datoteke ZagonTest
 
-```java
-/*
-Konfiguracijske datoteka iz katere preberemo imena polj v Matlab razredu.
+
+
 DoubleSolutionMatlabManagerConfig deduje iz abstraktnega razreda MatlabManagerConfig 
 v katerem so shranjene osnovne nastavitve problema
-*/
+
+MatlabManagerConfig:
+⋅⋅* variableName = "variable123"
+⋅⋅* evaluateMethod = "evaluate" 
+⋅⋅* numberOfVariables = "NumberOfVariables" 
+⋅⋅* numberOfObjectives = "NumberOfObjectives"
+
+DoubleSolutionMatlabManagerConfig:
+variableLimits = "Limits";
+
+```java
+/*Konfiguracijske datoteka iz katere preberemo imena polj v Matlab razredu.*/
 DoubleSolutionMatlabManagerConfig conf = new DoubleSolutionMatlabManagerConfig();
 
 ```
