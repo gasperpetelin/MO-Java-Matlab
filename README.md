@@ -6,7 +6,7 @@ Primer klica datoteke ZagonTest
 
 
 Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki so 
-potrebni za vsak problem. Razred lahko nato razširimo za točno določene probleme,
+potrebni za vsak problem. Razred lahko dodatno razširimo za točno določene probleme,
 kot so DoubleSolutionMatlabManagerConfig in BinarySolutionMatlabManagerConfig, ki vsebujejo
 še dodatne potrebne podatke.
 
@@ -27,7 +27,14 @@ BinarySolutionMatlabManagerConfig
 DoubleSolutionMatlabManagerConfig conf = new DoubleSolutionMatlabManagerConfig();
 
 ```
-neki
+
+MatlabManager je abstrakten razred, ki skrbi za vso komunikacijo med Java aplikacijo in Matlab programom.
+Razred lahko razširimo za specifičen tip problema, kot je Double in Binary problem.
+
+DoubleMatlabManager je namenjen reševanju problemov, ki imajo več double spremenljivk, zato razširja razred 
+MatlabManager ter implementira ISolutionEvaluation<DoubleSolution>, kar pomeni, da mu lahko pošljemo DoubleSolution,
+in zna vrniti seznam ocen.
+
 ```java
 DoubleMatlabManager manager = new DoubleMatlabManager(conf);
 manager.openSession();
