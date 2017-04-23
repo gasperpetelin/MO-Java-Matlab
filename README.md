@@ -109,7 +109,7 @@ jih pošljemo v konstruktor razreda
 BinarySolutionMatlabManagerConfig conf = new BinarySolutionMatlabManagerConfig();
 BinaryMatlabManager manager = new BinaryMatlabManager(conf);
 manager.openSession();
-manager.setPath("C:\\Users\\gasper\\Desktop\\jMetalMatlabWrapper\\matlabscripts");
+manager.setPath("C:\\matlabscripts");
 BinaryProblemBuilder builder = new BinaryProblemBuilder(manager, "Knapsack")
         .startArray()
             .addValue(5)
@@ -152,7 +152,6 @@ classdef Knapsack
       end
       
       function o = evaluate(obj, solution)
-        %solution = solution(:, 1);
         o(1) = -sum(solution'.*obj.Elements);
         o(2) = sum(solution);
         if(o(1)<-obj.Size)
