@@ -11,6 +11,9 @@ v katerem so shranjene osnovne nastavitve problema
 */
 DoubleSolutionMatlabManagerConfig conf = new DoubleSolutionMatlabManagerConfig();
 
+```
+neki
+```java
 DoubleMatlabManager manager = new DoubleMatlabManager(conf);
 manager.openSession();
 
