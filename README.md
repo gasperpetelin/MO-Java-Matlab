@@ -9,10 +9,10 @@ DoubleSolutionMatlabManagerConfig deduje iz abstraktnega razreda MatlabManagerCo
 v katerem so shranjene osnovne nastavitve problema
 
 MatlabManagerConfig:
-⋅⋅* variableName = "variable123"
-⋅⋅* evaluateMethod = "evaluate" 
-⋅⋅* numberOfVariables = "NumberOfVariables" 
-⋅⋅* numberOfObjectives = "NumberOfObjectives"
+* variableName = "variable123"
+* evaluateMethod = "evaluate" 
+* numberOfVariables = "NumberOfVariables" 
+* numberOfObjectives = "NumberOfObjectives"
 
 DoubleSolutionMatlabManagerConfig:
 variableLimits = "Limits";
