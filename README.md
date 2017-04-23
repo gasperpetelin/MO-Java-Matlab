@@ -1,9 +1,6 @@
 # jMetal problem evaluation in Matlab
 
 ### ZagonTest
-Primer klica datoteke ZagonTest
-
-
 
 Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki so 
 potrebni za vsak problem. Razred lahko dodatno razširimo za točno določene probleme,
@@ -54,6 +51,13 @@ se uporabijo za sestavo problema (število spremenljivke, limite, ...).
 
 ExternalDoubleProblem p = new DoubleProblemBuilder(manager, "ZagonTest").build();
 
+```
+
+V nadaljevanju isto kot pri navadnih problemih sestavimo algoritem in ga zaženemo.
+Ob koncu izvajanja je potrebno zapreti povezavo z Matlabom, saj s tem prekinemo sejo.
+
+```java
+
 Algorithm<List<DoubleSolution>> algorithm = new NSGAIIBuilder<DoubleSolution>(p,
         new SBXCrossover(0.9, 20),
         new PolynomialMutation(2, 20))
@@ -67,6 +71,11 @@ manager.closeSession();
 ```
 
 Datoteka ZagonTest
+
+Skripta vsebuje razred, ki ima polja NumberOfVariables, NumberOfObjectives, Name in Limits, ki so
+definirana v MatlabManagerConfig. Ta polja se uporabijo za sestavo problema. 
+
+Razred vsebuje tudi funkcijo evaluate, ki izračuna kvaliteto posamezne rešitve.
 
 ```matlab
 classdef ZagonTest
