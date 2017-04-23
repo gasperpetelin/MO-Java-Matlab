@@ -5,8 +5,10 @@ Primer klica datoteke ZagonTest
 
 
 
-Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki predstavljajo
-Matlab spremenljivko,ki se ustvari, in polj, ki jih mora imeti vsak problem.  
+Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki so 
+potrebni za vsak problem. Razred lahko nato razširimo za točno določene probleme,
+kot so DoubleSolutionMatlabManagerConfig in BinarySolutionMatlabManagerConfig, ki vsebujejo
+še dodatne potrebne podatke.
 
 MatlabManagerConfig:
 * variableName = "variable123"
@@ -16,6 +18,9 @@ MatlabManagerConfig:
 
 DoubleSolutionMatlabManagerConfig:
 * variableLimits = "Limits"
+
+BinarySolutionMatlabManagerConfig
+* numberOfBitsPerVariable = "BitsPerVariable"
 
 ```java
 /*Konfiguracijske datoteka iz katere preberemo imena polj v Matlab razredu.*/
