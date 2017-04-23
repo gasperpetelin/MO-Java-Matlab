@@ -4,8 +4,13 @@
 Primer klica datoteke ZagonTest
 
 ```java
-//Konfiguracijske datoteka iz katere preberemo imena polj v Matlab razredu
+/*
+Konfiguracijske datoteka iz katere preberemo imena polj v Matlab razredu.
+DoubleSolutionMatlabManagerConfig deduje iz abstraktnega razreda MatlabManagerConfig 
+v katerem so shranjene osnovne nastavitve problema
+*/
 DoubleSolutionMatlabManagerConfig conf = new DoubleSolutionMatlabManagerConfig();
+
 DoubleMatlabManager manager = new DoubleMatlabManager(conf);
 manager.openSession();
 
