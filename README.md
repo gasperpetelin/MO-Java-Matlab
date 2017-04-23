@@ -32,16 +32,27 @@ MatlabManager je abstrakten razred, ki skrbi za vso komunikacijo med Java aplika
 Razred lahko razširimo za specifičen tip problema, kot je Double in Binary problem.
 
 DoubleMatlabManager je namenjen reševanju problemov, ki imajo več double spremenljivk, zato razširja razred 
-MatlabManager ter implementira ISolutionEvaluation<DoubleSolution>, kar pomeni, da mu lahko pošljemo DoubleSolution,
-in zna vrniti seznam ocen.
+MatlabManager ter implementira ISolutionEvaluation, kar pomeni, da mu lahko pošljemo DoubleSolution,
+in zna izračunati kakovost rešitve.
+
+Pred prvim klicem je potrebno ustvariti še novo povezavo z Matlabom in nastaviti pot do .m datoteke
 
 ```java
+/*Manager, ki komunicira z zunanjim programom in vrača ocene rešitev.*/
 DoubleMatlabManager manager = new DoubleMatlabManager(conf);
 manager.openSession();
 
 manager.setPath("matlabscripts");
-DoubleProblemBuilder builder = new DoubleProblemBuilder(manager, "ZagonTest");
-ExternalDoubleProblem p = builder.build();
+
+```
+
+Za sestavo problema lahko uporabimo ProblemBuilder, ki mu podamo prej ustvarjenega managerja in ime 
+datoteke v kateri se nahaja problem. ProblemBuilder s pomočjo managerja prebere potrebne podatke, ki
+se uporabijo za sestavo problema (število spremenljivke, limite, ...). 
+
+```java
+
+ExternalDoubleProblem p = new DoubleProblemBuilder(manager, "ZagonTest").build();
 
 Algorithm<List<DoubleSolution>> algorithm = new NSGAIIBuilder<DoubleSolution>(p,
         new SBXCrossover(0.9, 20),
