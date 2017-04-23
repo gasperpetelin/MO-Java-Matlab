@@ -5,8 +5,8 @@ Primer klica datoteke ZagonTest
 
 
 
-DoubleSolutionMatlabManagerConfig deduje iz abstraktnega razreda MatlabManagerConfig 
-v katerem so shranjene osnovne nastavitve problema
+Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki predstavljajo
+Matlab spremenljivko,ki se ustvari, in polj, ki jih mora imeti vsak problem.  
 
 MatlabManagerConfig:
 * variableName = "variable123"
@@ -15,7 +15,7 @@ MatlabManagerConfig:
 * numberOfObjectives = "NumberOfObjectives"
 
 DoubleSolutionMatlabManagerConfig:
-variableLimits = "Limits";
+* variableLimits = "Limits"
 
 ```java
 /*Konfiguracijske datoteka iz katere preberemo imena polj v Matlab razredu.*/
