@@ -75,7 +75,8 @@ Datoteka ZagonTest
 Skripta vsebuje razred, ki ima polja NumberOfVariables, NumberOfObjectives, Name in Limits, ki so
 definirana v MatlabManagerConfig. Ta polja se uporabijo za sestavo problema. 
 
-Razred vsebuje tudi funkcijo evaluate, ki izračuna kvaliteto posamezne rešitve.
+Razred vsebuje tudi funkcijo evaluate, ki vrne vektor dolžine NumberOfObjectives, ki vsebuje 
+izračune posamezne rešitve.
 
 ```matlab
 classdef ZagonTest
