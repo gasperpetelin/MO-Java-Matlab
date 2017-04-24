@@ -17,6 +17,11 @@ public class BinaryMatlabManager extends MatlabManager<BinarySolutionMatlabManag
         super(config);
     }
 
+    public BinaryMatlabManager()
+    {
+        super(new BinarySolutionMatlabManagerConfig());
+    }
+
     public int getBitsPerVariable()
     {
         try

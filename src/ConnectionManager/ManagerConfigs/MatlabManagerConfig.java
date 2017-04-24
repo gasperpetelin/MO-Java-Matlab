@@ -7,6 +7,7 @@ public abstract class MatlabManagerConfig
     private String evaluateMethod = "evaluate";
     private String numberOfVariables = "NumberOfVariables";
     private String numberOfObjectives = "NumberOfObjectives";
+    private String problemName = "Name";
 
     public String getNumberOfVariables()
     {
@@ -38,6 +39,16 @@ public abstract class MatlabManagerConfig
         this.evaluateMethod = evaluateMethod;
     }
 
+
+    public String getProblemName()
+    {
+        return problemName;
+    }
+
+    public void setProblemName(String variableName)
+    {
+        this.problemName = variableName;
+    }
 
     public String getVariableName()
     {

@@ -73,13 +73,28 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
     }
 
     @Override
-    public int getNumberOfVriables()
+    public int getNumberOfVariables()
     {
         try
         {
             String command = this.config.getVariableName()+"."+this.config.getNumberOfVariables();
             Object var = this.proxy.getVariable(command);
             return (int) ((double[])var)[0];
+        }
+        catch (MatlabInvocationException e)
+        {
+            throw new JMetalException("Unable to get number of variables", e);
+        }
+    }
+
+    @Override
+    public String getProblemName()
+    {
+        try
+        {
+            String command = this.config.getVariableName()+"."+this.config.getProblemName();
+            return this.proxy.getVariable(command).toString();
+
         }
         catch (MatlabInvocationException e)
         {

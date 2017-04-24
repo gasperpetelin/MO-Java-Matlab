@@ -5,6 +5,7 @@ import ConnectionManager.ManagerInterfaces.ISolutionEvaluation;
 import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.BinarySolution;
 import org.uma.jmetal.solution.DoubleSolution;
+import org.uma.jmetal.util.JMetalException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +14,13 @@ public class ExternalDoubleProblem extends AbstractDoubleProblem
 {
     ISolutionEvaluation<DoubleSolution> evaluator;
 
-    public ExternalDoubleProblem(ISolutionEvaluation<DoubleSolution> evaluator, int numberOfVariables, int numberOfObjectives, List<Limit> limits)
+    public ExternalDoubleProblem(ISolutionEvaluation<DoubleSolution> evaluator, String problemName, int numberOfVariables, int numberOfObjectives, List<Limit> limits)
     {
         this.evaluator = evaluator;
 
         this.setNumberOfVariables(numberOfVariables);
         this.setNumberOfObjectives(numberOfObjectives);
+        this.setName(problemName);
 
         List<Double> lowerLimit = new ArrayList(this.getNumberOfVariables());
         List<Double> upperLimit = new ArrayList(this.getNumberOfVariables());
@@ -36,7 +38,9 @@ public class ExternalDoubleProblem extends AbstractDoubleProblem
     public void evaluate(DoubleSolution solution)
     {
         double[] objectives = evaluator.getSolution(solution);
-        for (int i = 0; i < objectives.length; i++)
+        if(objectives.length<this.getNumberOfObjectives())
+            throw new JMetalException("Evaluation function should return at least " + this.getNumberOfObjectives() + " objectives.");
+        for (int i = 0; i < this.getNumberOfObjectives(); i++)
         {
             solution.setObjective(i, objectives[i]);
         }

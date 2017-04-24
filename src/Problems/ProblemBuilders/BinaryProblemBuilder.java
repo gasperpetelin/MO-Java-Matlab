@@ -6,21 +6,41 @@ import Problems.ExternalBinaryProblem;
 
 public class BinaryProblemBuilder extends AbstractProblemBuilder<BinaryMatlabManager, BinaryProblemBuilder>
 {
+    int numberOfBitsPerVariable = -1;
+
     public ExternalBinaryProblem build()
     {
         this.manager.newObject(this.problemName, this.toMatlabCode());
 
-        int numberOfVariables = manager.getNumberOfVriables();
-        int numberOfObjectives = manager.getNumberOfObjectives();
-        int numberOfBitsPerVariable = manager.getBitsPerVariable();
+        if(this.overriddenNumberOfVariables<1)
+        {
+            this.overriddenNumberOfVariables = manager.getNumberOfVariables();
+        }
+        if(this.overriddenNumberOfObjectives<1)
+        {
+            this.overriddenNumberOfObjectives = manager.getNumberOfObjectives();
+        }
+        if(this.numberOfBitsPerVariable<1)
+        {
+            this.numberOfBitsPerVariable = manager.getBitsPerVariable();
+        }
 
-        return new ExternalBinaryProblem(manager, numberOfVariables, numberOfObjectives,  numberOfBitsPerVariable);
+        String problemName = manager.getProblemName();
+
+        return new ExternalBinaryProblem(manager, problemName, this.overriddenNumberOfVariables,
+                this.overriddenNumberOfObjectives,  this.numberOfBitsPerVariable);
     }
 
     public BinaryProblemBuilder(BinaryMatlabManager manager, String problemName)
     {
         this.manager = manager;
         this.problemName = problemName;
+    }
+
+    public BinaryProblemBuilder setNumberOfBitsPerVariable(int bits)
+    {
+        this.numberOfBitsPerVariable = bits;
+        return this;
     }
 
     public FluentArrayBuilder<BinaryProblemBuilder> startArray()

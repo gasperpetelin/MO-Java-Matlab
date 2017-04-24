@@ -15,6 +15,28 @@ public abstract class AbstractProblemBuilder<M extends IManager, T extends Abstr
     protected String problemName;
     protected List<AbstractVariable> arguments = new ArrayList<>();
 
+    protected int overriddenNumberOfVariables = -1;
+    protected int overriddenNumberOfObjectives = -1;
+    protected String overriddenProblemName = "";
+
+    public T setNumberOfVariables(int numberOfVaribles)
+    {
+        this.overriddenNumberOfVariables = numberOfVaribles;
+        return (T)this;
+    }
+
+    public T setNumberOfObjectives(int numberOfObjectives)
+    {
+        this.overriddenNumberOfObjectives = numberOfObjectives;
+        return (T)this;
+    }
+
+    public T setProblemName(String problemName)
+    {
+        this.overriddenProblemName= problemName;
+        return (T)this;
+    }
+
     public T addValue(AbstractVariable variable)
     {
         arguments.add(variable);

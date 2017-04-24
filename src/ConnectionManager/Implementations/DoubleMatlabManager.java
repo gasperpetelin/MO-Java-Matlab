@@ -17,13 +17,13 @@ public class DoubleMatlabManager extends MatlabManager<DoubleSolutionMatlabManag
         super(config);
     }
 
-    public List<Limit> getLimits(int numberOfVariables)
+    public List<Limit> getLimits()
     {
         List<Limit> array = new ArrayList<>();
         double[][] limits = this.get2DArray(this.config.getVariableName() + "." + this.config.getVariableLimits());
         if (limits==null)
             return null;
-        for (int i = 0; i < numberOfVariables; ++i)
+        for (int i = 0; i < limits.length; ++i)
         {
             array.add(new Limit(limits[i][0], limits[i][1]));
         }

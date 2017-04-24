@@ -7,5 +7,6 @@ public interface IManager
     void newObject(String objectName, String parameters);
     void setPath(String path);
     int getNumberOfObjectives();
-    int getNumberOfVriables();
+    int getNumberOfVariables();
+    String getProblemName();
 }

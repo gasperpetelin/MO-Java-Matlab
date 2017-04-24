@@ -23,8 +23,6 @@ classdef Knapsack
             o(1) = 0;
             o(2) = 0;
         end
-        
       end
-
    end
 end
