@@ -16,10 +16,12 @@ Zastavice
 * -cross - tip križanja
 * -mut - tip mutacije
 
-
-Crossover opcije
-* -cross blxalpha probability [alpha] .... -cross blxalpha 0.7 13
-* -cross null ... -cross null
+Crossover
+**Opcije**|**Primer**
+___|___
+-cross blxalpha probability [alpha] | -cross blxalpha 0.7 13
+-cross null | -cross null
+-coss |
 
 
 
