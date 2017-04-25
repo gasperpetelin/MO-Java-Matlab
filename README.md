@@ -15,6 +15,7 @@ Zastavice
 * -minLA - zgornja meja za vse spremenljivke
 * -cross - tip križanja
 * -mut - tip mutacije
+* -algo - tip algoritma
 
 
 ### Crossover
@@ -35,8 +36,14 @@ Zastavice
 | -mut simplerandom probability | -mut simplerandom 0.7 |
 | -mut uniform probability perturbation | -mut uniform 0.7 0.9 |
 
+### Algorithm
 
-
+| **Opcije**    |
+| ------------- |
+| -mut nsgaii |
+| -mut ibea |
+| -mut random |
+| -mut gde3 |
 
 
 ### ScriptRunner
