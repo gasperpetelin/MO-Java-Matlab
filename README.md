@@ -21,8 +21,8 @@ Zastavice
 
 | **Opcije**    | **Primer**    |
 | ------------- |---------------|
-| col 3 is      | right-aligned |
-| col 2 is      | centered      |
+| -cross blxalpha probability [alpha] | -cross blxalpha 0.7 13 |
+| -cross null | -cross null      |
 | zebra stripes | are neat      |
 
 
