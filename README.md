@@ -1,5 +1,16 @@
 # jMetal problem evaluation in Matlab
 
+### Poganjanje glavne skripte
+
+Zastavice
+* -v - število spremenljivk (obvezen)
+* -o - število kriterijev (obvezen)
+* -pop - velikost populacije
+* -eval - število iteracij 
+
+
+
+
 ### ScriptRunner
 
 Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki so 
