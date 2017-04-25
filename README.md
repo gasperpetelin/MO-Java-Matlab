@@ -7,6 +7,14 @@ Zastavice
 * -o - število kriterijev (obvezen)
 * -pop - velikost populacije
 * -eval - število iteracij 
+* -name - ime problema
+* -p - pot do .m datoteke
+* -minL - seznam spodnjih mej spremenljivk
+* -maxL - seznam zgorjnjih mej spremenljivk
+* -minLA - spodnja meja za vse spremenljivke
+* -minLA - zgornja meja za vse spremenljivke
+* -cros - tip križanja
+* -mut - tip mutacije
 
 
 
