@@ -1,6 +1,6 @@
 # jMetal problem evaluation in Matlab
 
-### ZagonTest
+### ScriptRunner
 
 Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki so 
 potrebni za vsak problem. Razred lahko dodatno razširimo za točno določene probleme,
@@ -49,7 +49,7 @@ se uporabijo za sestavo problema (število spremenljivke, limite, ...).
 
 ```java
 
-ExternalDoubleProblem p = new DoubleProblemBuilder(manager, "ZagonTest").build();
+ExternalDoubleProblem p = new DoubleProblemBuilder(manager, "ScriptRunner").build();
 
 ```
 
@@ -70,7 +70,7 @@ System.out.println(algorithmRunner.getComputingTime());
 manager.closeSession();
 ```
 
-Datoteka ZagonTest
+Datoteka ScriptRunner
 
 Skripta vsebuje razred, ki ima polja NumberOfVariables, NumberOfObjectives, Name in Limits, ki so
 definirana v MatlabManagerConfig. Ta polja se uporabijo za sestavo problema. 
@@ -79,7 +79,7 @@ Razred vsebuje tudi funkcijo evaluate, ki vrne vektor dolžine NumberOfObjective
 izračune posamezne rešitve.
 
 ```matlab
-classdef ZagonTest
+classdef ScriptRunner
    properties
       NumberOfVariables = 6
       NumberOfObjectives = 10
@@ -88,7 +88,7 @@ classdef ZagonTest
    end
    methods
 
-      function obj = ZagonTest()
+      function obj = ScriptRunner()
       end
       
       function o = evaluate(obj, solution)
