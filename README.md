@@ -13,8 +13,13 @@ Zastavice
 * -maxL - seznam zgorjnjih mej spremenljivk
 * -minLA - spodnja meja za vse spremenljivke
 * -minLA - zgornja meja za vse spremenljivke
-* -cros - tip križanja
+* -cross - tip križanja
 * -mut - tip mutacije
+
+
+Crossover opcije
+* -cross blxalpha probability [alpha] .... -cross blxalpha 0.7 13
+* -cross null ... -cross null
 
 
 
