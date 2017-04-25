@@ -17,7 +17,7 @@ Zastavice
 * -mut - tip mutacije
 
 
-## Crossover
+### Crossover
 
 | **Opcije**    | **Primer**    |
 | ------------- |---------------|
@@ -25,13 +25,15 @@ Zastavice
 | -cross null | -cross null      |
 | -cross sby probability distribution_index | -cross sby 0.7 0.9 |
 
-## Mutation
+### Mutation
 
 | **Opcije**    | **Primer**    |
 | ------------- |---------------|
 | -mut nonuniform probability perturbation max_iterations | -mut nonuniform 0.7 0.3 20 |
 | -mut null | -mut null |
 | -mut polynomial probability distribution_index | -mut polynomial 0.7 0.9 |
+| -mut simplerandom probability | -mut simplerandom 0.7 |
+| -mut uniform probability perturbation | -mut uniform 0.7 0.9 |
 
 
 
