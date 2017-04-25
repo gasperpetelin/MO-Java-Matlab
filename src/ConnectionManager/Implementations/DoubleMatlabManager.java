@@ -17,6 +17,11 @@ public class DoubleMatlabManager extends MatlabManager<DoubleSolutionMatlabManag
         super(config);
     }
 
+    public DoubleMatlabManager()
+    {
+        super(new DoubleSolutionMatlabManagerConfig());
+    }
+
     public List<Limit> getLimits()
     {
         List<Limit> array = new ArrayList<>();

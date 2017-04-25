@@ -1,13 +1,13 @@
-classdef ZagonTest
+classdef ScriptRunner
    properties
-      NumberOfVariables = 6
+      NumberOfVariables = 3
       NumberOfObjectives = 10
       Name = 'Zagon'
       Limits=[[-100,100];[-100,100];[-100,100];[-100,100];[-100,100];[-100,100]];
    end
    methods
 
-      function obj = ZagonTest()
+      function obj = ScriptRunner()
       end
       
       function o = evaluate(obj, solution)
