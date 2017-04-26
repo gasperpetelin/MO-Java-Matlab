@@ -2,7 +2,7 @@
 
     rez(1) = vhod(1);
     rez(2) = 2;
-    rez(3) = vhod(1)+vhod(2);
+    rez(3) = -(vhod(1)+vhod(2));
     rez(4) = 8;
     rez(5) = vhod(2);
     rez(6) = 7;

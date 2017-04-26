@@ -56,8 +56,9 @@ public class DoubleMatlabManager extends MatlabManager<DoubleSolutionMatlabManag
         {
             String command = this.config.getVariableName()
                     + "." + this.config.getEvaluateMethod() + "(" + this.toMatlabStructure(solution) + ")";
-            this.proxy.eval("t = " +command + ";");
-            return this.get2DArray("t")[0];
+
+            return  (double[]) this.proxy.returningEval(command, 1)[0];
+
         }
         catch (MatlabInvocationException e)
         {

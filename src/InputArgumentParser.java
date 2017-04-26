@@ -1,10 +1,14 @@
+import Problems.ExternalDoubleProblem;
 import Problems.Limit;
 import org.apache.commons.cli.*;
+import org.uma.jmetal.algorithm.Algorithm;
+import org.uma.jmetal.algorithm.multiobjective.gde3.GDE3Builder;
+import org.uma.jmetal.algorithm.multiobjective.ibea.IBEABuilder;
+import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
+import org.uma.jmetal.algorithm.multiobjective.randomsearch.RandomSearchBuilder;
 import org.uma.jmetal.operator.CrossoverOperator;
 import org.uma.jmetal.operator.MutationOperator;
-import org.uma.jmetal.operator.impl.crossover.BLXAlphaCrossover;
-import org.uma.jmetal.operator.impl.crossover.NullCrossover;
-import org.uma.jmetal.operator.impl.crossover.SBXCrossover;
+import org.uma.jmetal.operator.impl.crossover.*;
 import org.uma.jmetal.operator.impl.mutation.*;
 import org.uma.jmetal.solution.DoubleSolution;
 
@@ -13,6 +17,10 @@ import java.util.List;
 
 public class InputArgumentParser
 {
+
+    final String swNumberOfVariables = "v"; final String fnNumberOfVariables = "variables";
+
+
     boolean output = true;
     CommandLine cmd;
 
@@ -22,13 +30,13 @@ public class InputArgumentParser
             System.out.println(message);
     }
 
-    public InputArgumentParser(String[] input, boolean writeToConsole)
+    public InputArgumentParser(String[] input) throws ParseException
     {
-        this.output = writeToConsole;
+        this.output = true;
 
         Options options = new Options();
 
-        Option numberOfVariables = new Option("v", "variables", true, "number of variables");
+        Option numberOfVariables = new Option(swNumberOfVariables, fnNumberOfVariables, true, "number of variables");
         numberOfVariables.setRequired(true);
         options.addOption(numberOfVariables);
 
@@ -78,75 +86,116 @@ public class InputArgumentParser
         mutation.setArgs(Option.UNLIMITED_VALUES);
         options.addOption(mutation);
 
+        Option algorithm = new Option("algo", "algorithm", true, "optimization algorithm");
+        algorithm.setRequired(false);
+        options.addOption(algorithm);
+
+        Option print = new Option("print", "print", true, "print all warnings");
+        print.setRequired(false);
+        options.addOption(print);
+
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
 
 
+        //try
+        //{
+        cmd = parser.parse(options, input);
+        //}
+        //catch (ParseException e)
+        //{
+        //    System.out.println(e.getMessage());
+        //    formatter.printHelp("utility-name", options);
+        //    System.exit(1);
+        //    return;
+        //}
+
+        this.output = this.writeToConsole();
+
+    }
+
+    private boolean writeToConsole() throws ParseException
+    {
+        String var = cmd.getOptionValue("print");
+        if(var == null)
+            return true;
+
+        switch (var)
+        {
+            case "0":
+                return false;
+            case "1":
+                return true;
+            default:
+                throw new ParseException("parameter -print should be 0 or 1");
+        }
+    }
+
+    public int getNumberOfVariables() throws ParseException
+    {
+        return this.positiveIntEval(cmd.getOptionValue(fnNumberOfVariables), "v");
+    }
+
+    private int positiveIntEval(String evalStr, String fieldName) throws ParseException
+    {
+        ParseException ex = new ParseException("parameter -" + fieldName + " should be positive integer");
         try
         {
-            cmd = parser.parse(options, input);
+            int i =  Integer.parseInt(evalStr);
+            if(i<1)
+                throw ex;
+            return i;
         }
-        catch (ParseException e)
+        catch (NumberFormatException e)
         {
-            System.out.println(e.getMessage());
-            formatter.printHelp("utility-name", options);
-
-            System.exit(1);
-            return;
+            throw ex;
         }
-
     }
 
-    public int getNumberOfVariables()
+    public int getNumberOfObjectives() throws ParseException
     {
-        String var = cmd.getOptionValue("variables");
-        if(var == null)
-            return -1;
-        return Integer.parseInt(cmd.getOptionValue("variables"));
+        return this.positiveIntEval(cmd.getOptionValue("objectives"), "-o");
     }
 
-    public int getNumberOfObjectives()
+    public List<Limit> getLimits() throws ParseException
     {
-        String var = cmd.getOptionValue("objectives");
-        if(var == null)
-            return -1;
-        return Integer.parseInt(cmd.getOptionValue("objectives"));
-    }
-
-    public List<Limit> getLimits()
-    {
-
-        String[] lower  = cmd.getOptionValues("minL");
-        String[] upper = cmd.getOptionValues("maxL");
-        if(lower != null && upper != null)
+        try
         {
-            List<Limit> limits = new ArrayList<>();
-            String[] lowerLimits = lower;
-            String[] upperLimits = upper;
-            for (int i = 0; i < lower.length ; i++)
+            String[] lower = cmd.getOptionValues("minL");
+            String[] upper = cmd.getOptionValues("maxL");
+            if (lower != null && upper != null)
             {
-                double low = Double.parseDouble(lowerLimits[i]);
-                double up = Double.parseDouble(upperLimits[i]);
-                limits.add(new Limit(low, up));
+                List<Limit> limits = new ArrayList<>();
+                String[] lowerLimits = lower;
+                String[] upperLimits = upper;
+                for (int i = 0; i < lower.length; i++)
+                {
+                    double low = Double.parseDouble(lowerLimits[i]);
+                    double up = Double.parseDouble(upperLimits[i]);
+                    limits.add(new Limit(low, up));
+                }
+                return limits;
             }
-            return limits;
-        }
 
-        String minA = cmd.getOptionValue("minLA");
-        String maxA = cmd.getOptionValue("maxLA");
+            String minA = cmd.getOptionValue("minLA");
+            String maxA = cmd.getOptionValue("maxLA");
 
-        if(minA != null && !minA.isEmpty() && maxA != null && !maxA.isEmpty())
-        {
-            int variables = this.getNumberOfVariables();
-            List<Limit> limits = new ArrayList<>();
-            for (int i = 0; i < variables; i++)
+            if (minA != null && !minA.isEmpty() && maxA != null && !maxA.isEmpty())
             {
-                limits.add(new Limit(Double.parseDouble(minA), Double.parseDouble(maxA)));
+                int variables = this.getNumberOfVariables();
+                List<Limit> limits = new ArrayList<>();
+                for (int i = 0; i < variables; i++)
+                {
+                    limits.add(new Limit(Double.parseDouble(minA), Double.parseDouble(maxA)));
+                }
+                return limits;
             }
-            return limits;
         }
-
+        catch (NumberFormatException ex)
+        {
+            throw new ParseException("Limits not valid double");
+        }
         this.write("Limits not set. (-100, 100) will be used.");
         List<Limit> limits = new ArrayList<>();
         for (int i = 0; i < this.getNumberOfVariables() ; i++)
@@ -156,7 +205,7 @@ public class InputArgumentParser
         return limits;
     }
 
-    public CrossoverOperator<DoubleSolution> getCrossoverOperator()
+    public CrossoverOperator<DoubleSolution> getCrossoverOperator() throws ParseException
     {
         return CrossoverFactory(cmd.getOptionValues("cross"));
     }
@@ -227,7 +276,7 @@ public class InputArgumentParser
         return new NullMutation<>();
     }
 
-    private CrossoverOperator<DoubleSolution> CrossoverFactory(String[] parameters)
+    private CrossoverOperator<DoubleSolution> CrossoverFactory(String[] parameters) throws ParseException
     {
 
         if(parameters != null && parameters.length != 0)
@@ -260,23 +309,38 @@ public class InputArgumentParser
                         return new SBXCrossover(crossoverProbability, distributionIndex);
                     }
                     break;
+                default:
+                    throw new ParseException("No crossover operation with name: " + crossoverType);
             }
         }
         this.write("Crossover operator not set. NullCrossover will be used.");
         return new NullCrossover<>();
     }
 
-    public int getNumberOfEvaluations()
+    public int getNumberOfEvaluations() throws ParseException
     {
         String var = cmd.getOptionValue("evaluations");
-        if(var == null)
+        if (var == null)
         {
-            int size  = 2500;
+            int size = 2500;
             this.write("Number of evaluations not set. Default value is " + size + ".");
             return size;
-
         }
-        return Integer.parseInt(var);
+
+        ParseException ex = new ParseException("parameter -eval should be positive integer");
+
+        try
+        {
+            int i = Integer.parseInt(var);
+            if(i<1)
+                throw ex;
+            return i;
+        }
+        catch (NumberFormatException e)
+        {
+            throw ex;
+        }
+
     }
 
     public String getName()
@@ -293,5 +357,35 @@ public class InputArgumentParser
         if(name == null)
             return "";
         return name;
+    }
+
+    public Algorithm<List<DoubleSolution>> getAlgorithm(ExternalDoubleProblem problem) throws ParseException
+    {
+        return AlgorithmFactory(problem, cmd.getOptionValue("algo"));
+    }
+
+    private Algorithm<List<DoubleSolution>> AlgorithmFactory(ExternalDoubleProblem problem, String type) throws ParseException
+    {
+        CrossoverOperator<DoubleSolution> cross = this.getCrossoverOperator();
+        MutationOperator<DoubleSolution> mut = this.getMutation();
+        int maxeval = this.getNumberOfEvaluations();
+        int popSize = this.getPopulationSize();
+        if(type != null)
+        {
+            switch (type)
+            {
+                case "nsgaii":
+                    return new NSGAIIBuilder<>(problem, cross, mut).setMaxEvaluations(maxeval).setPopulationSize(popSize).build();
+                case "ibea":
+                    return new IBEABuilder(problem).setCrossover(cross).setMutation(mut).setMaxEvaluations(maxeval).setPopulationSize(popSize).build();
+                case "random":
+                    return new RandomSearchBuilder(problem).setMaxEvaluations(maxeval).build();
+                case "gde3":
+                    return new GDE3Builder(problem).setPopulationSize(popSize).setMaxEvaluations(maxeval).build();
+                default:
+                    throw new ParseException("No algorithm with name: " + type);
+            }
+        }
+        return new NSGAIIBuilder<>(problem, cross, mut).build();
     }
 }

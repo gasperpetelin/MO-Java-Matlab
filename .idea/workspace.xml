@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db4bb815-5d9f-4f4f-bc3f-d59a7565b460" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/InputArgumentParser.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/matlabscripts/ZagonTest.m" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/matlabscripts/zagon.m" afterPath="$PROJECT_DIR$/matlabscripts/zagon.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ConnectionManager/Implementations/BinaryMatlabManager.java" afterPath="$PROJECT_DIR$/src/ConnectionManager/Implementations/BinaryMatlabManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ConnectionManager/Implementations/DoubleMatlabManager.java" afterPath="$PROJECT_DIR$/src/ConnectionManager/Implementations/DoubleMatlabManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/InputArgumentParser.java" afterPath="$PROJECT_DIR$/src/InputArgumentParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.java" afterPath="$PROJECT_DIR$/src/main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,37 +26,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="DoubleMatlabManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ConnectionManager/Implementations/DoubleMatlabManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="34" column="21" lean-forward="false" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DoubleProblemBuilder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Problems/ProblemBuilders/DoubleProblemBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="41" column="24" lean-forward="false" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#2056#2057#0" expanded="false" />
-                <element signature="e#2109#2110#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="57" column="39" lean-forward="true" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
+            <state relative-caret-position="273">
+              <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,65 +41,9 @@
       <file leaf-file-name="MatlabManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectionManager/MatlabManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="110" column="26" lean-forward="true" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
+            <state relative-caret-position="684">
+              <caret line="80" column="57" lean-forward="true" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InputArgumentParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/InputArgumentParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="222" column="0" lean-forward="true" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5826#5827#0" expanded="true" />
-                <element signature="e#5897#5898#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SBXCrossover.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/impl/crossover/SBXCrossover.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="211">
-              <caret line="48" column="9" lean-forward="false" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BLXAlphaCrossover.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/impl/crossover/BLXAlphaCrossover.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="47" column="9" lean-forward="false" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CommandLine.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/libs/commons-cli-1.3.1.jar!/org/apache/commons/cli/CommandLine.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConstructorArguments.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Problems/ProblemBuilders/ConstructorArguments.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="672">
-              <caret line="37" column="22" lean-forward="false" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -132,10 +51,71 @@
       <file leaf-file-name="BinaryMatlabManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConnectionManager/Implementations/BinaryMatlabManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="882">
-              <caret line="55" column="23" lean-forward="false" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
+            <state relative-caret-position="273">
+              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DoubleMatlabManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ConnectionManager/Implementations/DoubleMatlabManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="488">
+              <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RemoteMatlabProxy.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/matconsolectl-4.4.0-sources.jar!/matlabcontrol/RemoteMatlabProxy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="167">
+              <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
               <folding>
+                <element signature="e#6241#6433#0" expanded="true" />
+                <element signature="e#6432#6433#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InputArgumentParser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/InputArgumentParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParseException.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/commons-cli-1.3.1.jar!/org/apache/commons/cli/ParseException.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="147">
+              <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+              <folding>
+                <element signature="e#301#302#0" expanded="true" />
+                <element signature="e#331#332#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RandomSearchBuilder.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/randomsearch/RandomSearchBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#1782#0" expanded="false" />
                 <element signature="imports" expanded="false" />
+                <element signature="e#1394#1395#0" expanded="false" />
+                <element signature="e#1425#1426#0" expanded="false" />
+                <element signature="e#1715#1716#0" expanded="false" />
+                <element signature="e#1777#1778#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -161,6 +141,14 @@
       <find>numberofb</find>
       <find>2500</find>
       <find>cross</find>
+      <find>setcro</find>
+      <find>-100</find>
+      <find>limit</find>
+      <find>t</find>
+      <find>prin</find>
+      <find>limi</find>
+      <find>throw</find>
+      <find>&quot;variables&quot;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -174,12 +162,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/ConnectionManager/IConstrainEvaluation.java" />
-        <option value="$PROJECT_DIR$/src/ConnectionManager/ConstraintEvaluation.java" />
-        <option value="$PROJECT_DIR$/src/ConnectionManager/ManagerInterfaces/ISolutionEvaluation.java" />
-        <option value="$PROJECT_DIR$/src/ConnectionManager/MatlabSolutionManager.java" />
-        <option value="$PROJECT_DIR$/src/ConnectionManager/ManagerConfigs/BinarySolutionMatlabManagerConfig.java" />
-        <option value="$PROJECT_DIR$/src/ConnectionManager/ManagerConfigs/Implementations/BinarySolutionMatlabManagerConfig.java" />
         <option value="$PROJECT_DIR$/src/ConnectionManager/ManagerConfigs/Implementations/DoubleSolutionMatlabManagerConfig.java" />
         <option value="$PROJECT_DIR$/src/ConnectionManager/ManagerConfigs/MatlabConstrainedManagerConfig.java" />
         <option value="$PROJECT_DIR$/src/ConnectionManager/ProblemTypes/BinaryMatlabManager.java" />
@@ -191,7 +173,6 @@
         <option value="$PROJECT_DIR$/src/Problems/ProblemBuilders/Fluent/Variables/AbstractMatlabVariable.java" />
         <option value="$PROJECT_DIR$/src/Problems/ProblemBuilders/Fluent/FluentArgumentBuilder.java" />
         <option value="$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/problem/impl/AbstractBinaryProblem.java" />
-        <option value="$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/impl/crossover/SBXCrossover.java" />
         <option value="$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/CrossoverOperator.java" />
         <option value="$PROJECT_DIR$/src/Problems/ProblemBuilders/MatlabVariables/Implementations/IntMatlab.java" />
         <option value="$PROJECT_DIR$/src/Problems/ProblemBuilders/MatlabVariables/Implementations/DoubleMatlab.java" />
@@ -213,18 +194,25 @@
         <option value="$PROJECT_DIR$/src/ConnectionManager/IManager.java" />
         <option value="$PROJECT_DIR$/src/ConnectionManager/ManagerConfigs/MatlabManagerConfig.java" />
         <option value="$PROJECT_DIR$/src/Problems/ProblemBuilders/AbstractProblemBuilder.java" />
-        <option value="$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAIIBuilder.java" />
         <option value="$PROJECT_DIR$/src/Problems/ProblemBuilders/DoubleProblemBuilder.java" />
         <option value="$PROJECT_DIR$/src/Problems/ExternalDoubleProblem.java" />
         <option value="$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/problem/impl/AbstractGenericProblem.java" />
         <option value="$PROJECT_DIR$/src/Problems/ExternalBinaryProblem.java" />
         <option value="$PROJECT_DIR$/src/Problems/ProblemBuilders/BinaryProblemBuilder.java" />
-        <option value="$PROJECT_DIR$/src/ConnectionManager/Implementations/BinaryMatlabManager.java" />
-        <option value="$PROJECT_DIR$/src/ConnectionManager/Implementations/DoubleMatlabManager.java" />
         <option value="$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/algorithm/Algorithm.java" />
         <option value="$PROJECT_DIR$/src/ConnectionManager/MatlabManager.java" />
-        <option value="$PROJECT_DIR$/src/main.java" />
+        <option value="$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/impl/crossover/SBXCrossover.java" />
+        <option value="$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/nsgaiii/NSGAIIIBuilder.java" />
+        <option value="$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/nsgaiii/NSGAIII.java" />
+        <option value="$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/algorithm/impl/AbstractGeneticAlgorithm.java" />
+        <option value="$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/ibea/IBEABuilder.java" />
+        <option value="$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/util/JMetalLogger.java" />
+        <option value="$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/randomsearch/RandomSearchBuilder.java" />
+        <option value="$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAIIBuilder.java" />
+        <option value="$PROJECT_DIR$/src/ConnectionManager/Implementations/DoubleMatlabManager.java" />
+        <option value="$PROJECT_DIR$/src/ConnectionManager/Implementations/BinaryMatlabManager.java" />
         <option value="$PROJECT_DIR$/src/InputArgumentParser.java" />
+        <option value="$PROJECT_DIR$/src/main.java" />
       </list>
     </option>
   </component>
@@ -249,6 +237,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -512,8 +502,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -650,7 +638,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="main" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="-v 3 -o 3 -p &quot;matlabscripts&quot;" />
+      <option name="PROGRAM_PARAMETERS" value="-v 3 -o 3 -p C:\Users\gasper\Desktop\MO-Java-Matlab\matlabscripts -print 1 -pop 60 -eval 1000 -algo ibea -minLA -90 -maxLA 90 -cross null" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -884,27 +872,27 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.4462943" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.42910847" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2446206" sideWeight="0.39688507" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23216309" sideWeight="0.43716434" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23216309" sideWeight="0.56283563" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2446206" sideWeight="0.6031149" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1895811" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19387755" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3952435" sideWeight="0.5547798" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3952435" sideWeight="0.57787323" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3269731" sideWeight="0.49615714" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32616082" sideWeight="0.49409238" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -912,15 +900,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/InputArgumentParser.java</url>
-          <line>119</line>
-          <properties />
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="39" />
+      <option name="time" value="49" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -929,46 +909,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/ConnectionManager/ProblemTypes/BinaryMatlabManager.java" />
-    <entry file="file://$PROJECT_DIR$/src/Problems/ProblemBuilders/Fluent/Variables/IMatlabVariable.java" />
-    <entry file="file://$PROJECT_DIR$/src/Problems/ProblemBuilders/Fluent/Variables/AbstractMatlabVariable.java" />
-    <entry file="file://$PROJECT_DIR$/src/Problems/ProblemBuilders/Fluent/FluentArgumentBuilder.java" />
-    <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/util/JMetalException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/problem/impl/AbstractBinaryProblem.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="7" column="22" lean-forward="false" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/CrossoverOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Problems/ProblemBuilders/MatlabVariables/Implementations/IntMatlabTest.java" />
-    <entry file="file://$PROJECT_DIR$/tests/Problems/ProblemBuilders/MatlabVariables/Implementations/ArrayMatlabTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="36" column="0" lean-forward="true" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Problems/ProblemBuilders/MatlabVariables/Implementations/DoubleMatlabTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="15" column="51" lean-forward="true" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Problems/ProblemBuilders/MatlabVariables/Implementations/DoubleMatlab.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1066,13 +1006,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAIIBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="41" column="26" lean-forward="false" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Problems/ProblemBuilders/FluentArrayBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="581">
@@ -1154,16 +1087,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConnectionManager/Implementations/DoubleMatlabManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="34" column="21" lean-forward="false" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/algorithm/Algorithm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -1183,16 +1106,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConnectionManager/Implementations/BinaryMatlabManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="882">
-          <caret line="55" column="23" lean-forward="false" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/commons-cli-1.3.1.jar!/org/apache/commons/cli/Option.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1029">
@@ -1200,27 +1113,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConnectionManager/MatlabManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="110" column="26" lean-forward="true" selection-start-line="110" selection-start-column="26" selection-end-line="110" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/impl/crossover/BLXAlphaCrossover.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="47" column="9" lean-forward="false" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/impl/crossover/SBXCrossover.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="48" column="9" lean-forward="false" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1228,26 +1124,146 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
           <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/operator/impl/crossover/SBXCrossover.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-601">
+          <caret line="61" column="46" lean-forward="false" selection-start-line="61" selection-start-column="29" selection-end-line="61" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/algorithm/impl/AbstractGeneticAlgorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/logging/Logger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="755" column="17" lean-forward="false" selection-start-line="755" selection-start-column="17" selection-end-line="755" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jmetal-core-5.2-sources.jar!/org/uma/jmetal/util/JMetalLogger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1722">
+          <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/ibea/IBEABuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="115" column="27" lean-forward="false" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/nsgaiii/NSGAIIIBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="99" column="0" lean-forward="false" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/nsgaiii/NSGAIII.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/randomsearch/RandomSearchBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#1782#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1394#1395#0" expanded="false" />
+            <element signature="e#1425#1426#0" expanded="false" />
+            <element signature="e#1715#1716#0" expanded="false" />
+            <element signature="e#1777#1778#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/jmetal-algorithm-5.2-sources.jar!/org/uma/jmetal/algorithm/multiobjective/nsgaii/NSGAIIBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="38" column="9" lean-forward="false" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectionManager/MatlabManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="80" column="57" lean-forward="true" selection-start-line="80" selection-start-column="57" selection-end-line="80" selection-end-column="57" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/matconsolectl-4.4.0-sources.jar!/matlabcontrol/MatlabOperations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="96" column="20" lean-forward="false" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/matconsolectl-4.4.0-sources.jar!/matlabcontrol/RemoteMatlabProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="207" column="0" lean-forward="false" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
+          <folding>
+            <element signature="e#6241#6433#0" expanded="true" />
+            <element signature="e#6432#6433#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectionManager/Implementations/BinaryMatlabManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConnectionManager/Implementations/DoubleMatlabManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="63" column="9" lean-forward="true" selection-start-line="63" selection-start-column="9" selection-end-line="63" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/commons-cli-1.3.1.jar!/org/apache/commons/cli/ParseException.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="10" column="11" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
+          <folding>
+            <element signature="e#301#302#0" expanded="true" />
+            <element signature="e#331#332#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/InputArgumentParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="222" column="0" lean-forward="true" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5826#5827#0" expanded="true" />
-            <element signature="e#5897#5898#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="168">
+          <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="57" column="39" lean-forward="true" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
+        <state relative-caret-position="273">
+          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
