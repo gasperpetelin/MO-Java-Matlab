@@ -18,6 +18,8 @@ Zastavice
 * -algo - tip algoritma
 * -print - izpis nastavitev programa
 
+Primer:
+-v 3 -o 3 -p matlabscripts -print 1 -pop 60 -eval 1000 -algo ibea -minLA -90 -maxLA 90 -cross null
 
 ### Crossover
 
