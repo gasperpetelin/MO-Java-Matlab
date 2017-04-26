@@ -16,6 +16,7 @@ Zastavice
 * -cross - tip križanja
 * -mut - tip mutacije
 * -algo - tip algoritma
+* -print - izpis nastavitev programa
 
 
 ### Crossover
