@@ -3,6 +3,7 @@ import Problems.ExternalDoubleProblem;
 import Problems.ProblemBuilders.DoubleProblemBuilder;
 import org.apache.commons.cli.ParseException;
 import org.uma.jmetal.algorithm.Algorithm;
+import org.uma.jmetal.algorithm.multiobjective.spea2.SPEA2;
 import org.uma.jmetal.solution.DoubleSolution;
 import org.uma.jmetal.util.AlgorithmRunner;
 
@@ -27,6 +28,9 @@ public class main
                     .setProblemName(inputPaser.getName())
                     .addLimits(inputPaser.getLimits());
 
+            //TODO
+            //SPEA2
+            //PAES
             ExternalDoubleProblem p = builder.build();
 
             Algorithm<List<DoubleSolution>> algorithm = inputPaser.getAlgorithm(p);

@@ -94,22 +94,16 @@ public class InputArgumentParser
         print.setRequired(false);
         options.addOption(print);
 
+        Option file = new Option("file", "file", true, "write to file");
+        print.setRequired(false);
+        options.addOption(file);
+
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
 
 
-
-        //try
-        //{
         cmd = parser.parse(options, input);
-        //}
-        //catch (ParseException e)
-        //{
-        //    System.out.println(e.getMessage());
-        //    formatter.printHelp("utility-name", options);
-        //    System.exit(1);
-        //    return;
-        //}
+
 
         this.output = this.writeToConsole();
 
