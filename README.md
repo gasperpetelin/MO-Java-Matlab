@@ -49,6 +49,8 @@ Primer:
 | -mut gde3 |
 
 
+
+
 ### ScriptRunner
 
 Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki so 
