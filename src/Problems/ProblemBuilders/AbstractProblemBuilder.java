@@ -12,7 +12,6 @@ import java.util.List;
 public abstract class AbstractProblemBuilder<M extends IManager, T extends AbstractProblemBuilder<M, ?>>
 {
 
-
     protected M manager;
     protected String problemName;
     protected List<AbstractVariable> arguments = new ArrayList<>();

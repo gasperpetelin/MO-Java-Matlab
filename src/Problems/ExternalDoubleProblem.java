@@ -2,25 +2,29 @@ package Problems;
 
 
 import ConnectionManager.ManagerInterfaces.ISolutionEvaluation;
+import Problems.PopulationLogger.IPopulationLogger;
+import Problems.PopulationLogger.NullDoubleLogger;
 import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
-import org.uma.jmetal.solution.BinarySolution;
 import org.uma.jmetal.solution.DoubleSolution;
 import org.uma.jmetal.util.JMetalException;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExternalDoubleProblem extends AbstractDoubleProblem
 {
-    private String fileName = "testfile.txt";
+    IPopulationLogger<DoubleSolution> logger;
 
     ISolutionEvaluation<DoubleSolution> evaluator;
 
     public ExternalDoubleProblem(ISolutionEvaluation<DoubleSolution> evaluator, String problemName, int numberOfVariables, int numberOfObjectives, List<Limit> limits)
+    {
+        this(evaluator, problemName, numberOfVariables, numberOfObjectives, limits, new NullDoubleLogger());
+    }
+
+    public ExternalDoubleProblem(ISolutionEvaluation<DoubleSolution> evaluator, String problemName, int numberOfVariables, int numberOfObjectives, List<Limit> limits, IPopulationLogger<DoubleSolution> logger)
     {
         this.evaluator = evaluator;
 
@@ -38,32 +42,11 @@ public class ExternalDoubleProblem extends AbstractDoubleProblem
 
         this.setLowerLimit(lowerLimit);
         this.setUpperLimit(upperLimit);
+
+        this.logger = logger;
+        this.logger.init(getNumberOfVariables(), getNumberOfObjectives());
     }
 
-    private void writeToFile(DoubleSolution solution, double[] objectives)
-    {
-
-        StringBuilder b = new StringBuilder();
-        for (int i = 0; i < solution.getNumberOfVariables(); i++)
-        {
-            b.append(solution.getVariableValueString(i) + ",");
-        }
-        for (int i = 0; i < objectives.length; i++)
-        {
-            b.append(objectives[i] + ",");
-        }
-        b.deleteCharAt(b.length()-1);
-        b.append(System.lineSeparator());
-
-        try
-        {
-            Files.write(Paths.get(fileName), b.toString().getBytes(), StandardOpenOption.APPEND);
-        }
-        catch (IOException e)
-        {
-
-        }
-    }
 
     @Override
     public void evaluate(DoubleSolution solution)
@@ -72,11 +55,14 @@ public class ExternalDoubleProblem extends AbstractDoubleProblem
         if(objectives.length<this.getNumberOfObjectives())
             throw new JMetalException("Evaluation function should return at least " + this.getNumberOfObjectives() + " objectives.");
 
-        this.writeToFile(solution, objectives);
+
 
         for (int i = 0; i < this.getNumberOfObjectives(); i++)
         {
             solution.setObjective(i, objectives[i]);
         }
+
+        this.logger.logSolution(solution);
+
     }
 }

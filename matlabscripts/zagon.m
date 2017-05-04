@@ -1,7 +1,10 @@
  function rezultat=zagon(vhod)
 
-    rez(1) = vhod(1)^2;% + (vhod(2)-3)^2;
-    rez(2) = (vhod(1)-2)^2;
+    x = vhod(1);
+    y = vhod(2);
+ 
+    rez(1) = x^2-y;% + (vhod(2)-3)^2;
+    rez(2) = -.5*x-y-1;
 %     rez(3) = -(vhod(1)+vhod(2));
 %     rez(4) = 8;
 %     rez(5) = vhod(2);

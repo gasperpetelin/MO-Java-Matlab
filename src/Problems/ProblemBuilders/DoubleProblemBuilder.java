@@ -2,8 +2,13 @@ package Problems.ProblemBuilders;
 
 
 import ConnectionManager.Implementations.DoubleMatlabManager;
+import ConnectionManager.ManagerInterfaces.ISolutionEvaluation;
 import Problems.ExternalDoubleProblem;
 import Problems.Limit;
+import Problems.PopulationLogger.FileDoubleLogger;
+import Problems.PopulationLogger.IPopulationLogger;
+import Problems.PopulationLogger.NullDoubleLogger;
+import org.uma.jmetal.solution.DoubleSolution;
 import org.uma.jmetal.util.JMetalException;
 
 import java.util.ArrayList;
@@ -12,6 +17,7 @@ import java.util.List;
 public class DoubleProblemBuilder extends AbstractProblemBuilder<DoubleMatlabManager, DoubleProblemBuilder>
 {
 
+    IPopulationLogger<DoubleSolution> logger = new NullDoubleLogger();
     List<Limit> limits;
 
     public ExternalDoubleProblem build()
@@ -36,12 +42,20 @@ public class DoubleProblemBuilder extends AbstractProblemBuilder<DoubleMatlabMan
         if(this.limits.size()<this.overriddenNumberOfVariables)
             throw new JMetalException("Number of variables should match number of limits.");
 
-        return new ExternalDoubleProblem(manager, this.overriddenProblemName, this.overriddenNumberOfVariables, this.overriddenNumberOfObjectives,  limits);
+
+
+        return new ExternalDoubleProblem(manager, this.overriddenProblemName, this.overriddenNumberOfVariables, this.overriddenNumberOfObjectives,  limits, this.logger);
     }
 
     public DoubleProblemBuilder addLimits(List<Limit> limits)
     {
         this.limits = limits;
+        return this;
+    }
+
+    public DoubleProblemBuilder addLogger(IPopulationLogger<DoubleSolution> logger)
+    {
+        this.logger = logger;
         return this;
     }
 

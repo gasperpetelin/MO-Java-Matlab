@@ -1,11 +1,14 @@
 import Problems.ExternalDoubleProblem;
 import Problems.Limit;
+import Problems.PopulationLogger.AlgorithmMetaData;
 import org.apache.commons.cli.*;
 import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.algorithm.multiobjective.gde3.GDE3Builder;
 import org.uma.jmetal.algorithm.multiobjective.ibea.IBEABuilder;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
+import org.uma.jmetal.algorithm.multiobjective.paes.PAESBuilder;
 import org.uma.jmetal.algorithm.multiobjective.randomsearch.RandomSearchBuilder;
+import org.uma.jmetal.algorithm.multiobjective.spea2.SPEA2Builder;
 import org.uma.jmetal.operator.CrossoverOperator;
 import org.uma.jmetal.operator.MutationOperator;
 import org.uma.jmetal.operator.impl.crossover.*;
@@ -23,6 +26,7 @@ public class InputArgumentParser
 
     boolean output = true;
     CommandLine cmd;
+    AlgorithmMetaData metaData;
 
     public void write(String message)
     {
@@ -95,8 +99,12 @@ public class InputArgumentParser
         options.addOption(print);
 
         Option file = new Option("file", "file", true, "write to file");
-        print.setRequired(false);
+        file.setRequired(false);
         options.addOption(file);
+
+        Option front = new Option("front", "front", true, "front number");
+        front.setRequired(false);
+        options.addOption(front);
 
         CommandLineParser parser = new DefaultParser();
         HelpFormatter formatter = new HelpFormatter();
@@ -150,6 +158,22 @@ public class InputArgumentParser
     public int getNumberOfObjectives() throws ParseException
     {
         return this.positiveIntEval(cmd.getOptionValue("objectives"), "-o");
+    }
+
+    public Integer getFront() throws ParseException
+    {
+        ParseException ex = new ParseException("parameter -front should be nonnegative integer");
+        try
+        {
+            int i =  Integer.parseInt(cmd.getOptionValue("front"));
+            if(i<0)
+                throw ex;
+            return i;
+        }
+        catch (NumberFormatException e)
+        {
+           return null;
+        }
     }
 
     public List<Limit> getLimits() throws ParseException
@@ -222,6 +246,7 @@ public class InputArgumentParser
         return this.MutationFactory(cmd.getOptionValues("mut"));
     }
 
+
     private MutationOperator<DoubleSolution> MutationFactory(String[] parameters)
     {
         if(parameters != null && parameters.length != 0)
@@ -269,6 +294,8 @@ public class InputArgumentParser
         this.write("Mutation operator not set. NullMutation will be used.");
         return new NullMutation<>();
     }
+
+
 
     private CrossoverOperator<DoubleSolution> CrossoverFactory(String[] parameters) throws ParseException
     {
@@ -345,12 +372,26 @@ public class InputArgumentParser
         return name;
     }
 
+    public String getFileName()
+    {
+        return cmd.getOptionValue("file");
+    }
+
     public String getPath()
     {
         String name =  cmd.getOptionValue("path");
         if(name == null)
             return "";
         return name;
+    }
+
+    public AlgorithmMetaData getMetaData() throws Exception
+    {
+        if(this.metaData == null)
+            throw new Exception("Algorithm not yet build");
+
+        return this.metaData;
+
     }
 
     public Algorithm<List<DoubleSolution>> getAlgorithm(ExternalDoubleProblem problem) throws ParseException
@@ -360,8 +401,12 @@ public class InputArgumentParser
 
     private Algorithm<List<DoubleSolution>> AlgorithmFactory(ExternalDoubleProblem problem, String type) throws ParseException
     {
+
+
         CrossoverOperator<DoubleSolution> cross = this.getCrossoverOperator();
         MutationOperator<DoubleSolution> mut = this.getMutation();
+        Algorithm<List<DoubleSolution>> algorithm = null;
+
         int maxeval = this.getNumberOfEvaluations();
         int popSize = this.getPopulationSize();
         if(type != null)
@@ -369,17 +414,56 @@ public class InputArgumentParser
             switch (type)
             {
                 case "nsgaii":
-                    return new NSGAIIBuilder<>(problem, cross, mut).setMaxEvaluations(maxeval).setPopulationSize(popSize).build();
+                    algorithm = new NSGAIIBuilder<>(problem, cross, mut)
+                            .setMaxEvaluations(maxeval)
+                            .setPopulationSize(popSize)
+                            .build();
+                    break;
                 case "ibea":
-                    return new IBEABuilder(problem).setCrossover(cross).setMutation(mut).setMaxEvaluations(maxeval).setPopulationSize(popSize).build();
+                    algorithm = new IBEABuilder(problem)
+                            .setArchiveSize(5)
+                            .setCrossover(cross)
+                            .setMutation(mut)
+                            .setMaxEvaluations(maxeval)
+                            .setPopulationSize(popSize)
+                            .build();
+                    break;
                 case "random":
-                    return new RandomSearchBuilder(problem).setMaxEvaluations(maxeval).build();
+                    algorithm = new RandomSearchBuilder(problem)
+                            .setMaxEvaluations(maxeval)
+                            .build();
+                    break;
                 case "gde3":
-                    return new GDE3Builder(problem).setPopulationSize(popSize).setMaxEvaluations(maxeval).build();
+                    algorithm = new GDE3Builder(problem)
+                            .setPopulationSize(popSize)
+                            .setMaxEvaluations(maxeval)
+                            .build();
+                    break;
+                case "spea2":
+                    algorithm = new SPEA2Builder(problem, cross, mut)
+                            .setMaxIterations(maxeval)
+                            .setPopulationSize(popSize)
+                            .build();
+                    break;
+                case "paes":
+                    algorithm = new PAESBuilder(problem)
+                            .setMutationOperator(mut)
+                            .setMaxEvaluations(maxeval)
+                            .build();
+                    break;
+
+
                 default:
                     throw new ParseException("No algorithm with name: " + type);
             }
         }
-        return new NSGAIIBuilder<>(problem, cross, mut).build();
+
+
+        if(algorithm==null)
+            algorithm = new NSGAIIBuilder<>(problem, cross, mut).build();
+
+        this.metaData = new AlgorithmMetaData(algorithm, mut, cross);
+
+        return algorithm;
     }
 }

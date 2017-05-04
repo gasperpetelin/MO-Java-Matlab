@@ -1,9 +1,11 @@
 import ConnectionManager.Implementations.DoubleMatlabManager;
 import Problems.ExternalDoubleProblem;
+import Problems.PopulationLogger.FileDoubleLogger;
+import Problems.PopulationLogger.IPopulationLogger;
+import Problems.PopulationLogger.NullDoubleLogger;
 import Problems.ProblemBuilders.DoubleProblemBuilder;
 import org.apache.commons.cli.ParseException;
 import org.uma.jmetal.algorithm.Algorithm;
-import org.uma.jmetal.algorithm.multiobjective.spea2.SPEA2;
 import org.uma.jmetal.solution.DoubleSolution;
 import org.uma.jmetal.util.AlgorithmRunner;
 
@@ -11,8 +13,36 @@ import java.util.List;
 
 public class main
 {
-    public static void main(String [] args)
+    public static void main(String [] args) throws Exception
     {
+
+
+
+
+        //DefaultCategoryDataset line_chart_dataset = new DefaultCategoryDataset();
+        //line_chart_dataset.addValue( 15 , "schools" , "1970" );
+        //line_chart_dataset.addValue( 30 , "schools" , "1980" );
+        //line_chart_dataset.addValue( 60 , "schools" , "1990" );
+        //line_chart_dataset.addValue( 120 , "schools" , "2000" );
+        //line_chart_dataset.addValue( 240 , "schools" , "2010" );
+        //line_chart_dataset.addValue( 300 , "schools" , "2014" );
+        //JFreeChart lineChartObject = ChartFactory.createLineChart(
+        //        "Schools Vs Years","Year",
+        //        "Schools Count",
+        //        line_chart_dataset, PlotOrientation.VERTICAL,
+        //        true,true,false);
+        //int width = 640;    /* Width of the image */
+        //int height = 480;   /* Height of the image */
+        //File lineChart = new File( "LineChart.jpeg" );
+        //try
+        //{
+        //    ChartUtilities.saveChartAsJPEG(lineChart ,lineChartObject, width ,height);
+        //} catch (IOException e)
+        //{
+        //    e.printStackTrace();
+        //}
+
+
         try
         {
             InputArgumentParser inputPaser = new InputArgumentParser(args);
@@ -22,20 +52,41 @@ public class main
 
             manager.setPath(System.getProperty("user.dir"));
             manager.setPath(inputPaser.getPath());
+
+
+            String fileName = inputPaser.getFileName();
+            IPopulationLogger<DoubleSolution> logger;
+            if(fileName==null || fileName.equals(""))
+            {
+                logger = new NullDoubleLogger();
+            }
+            else
+            {
+                logger = new FileDoubleLogger(inputPaser.getFileName(), inputPaser.getFront());
+            }
+
+
             DoubleProblemBuilder builder = new DoubleProblemBuilder(manager, "ScriptRunner")
                     .setNumberOfVariables(inputPaser.getNumberOfVariables())
                     .setNumberOfObjectives(inputPaser.getNumberOfObjectives())
                     .setProblemName(inputPaser.getName())
-                    .addLimits(inputPaser.getLimits());
+                    .addLimits(inputPaser.getLimits())
+                    .addLogger(logger);
 
             //TODO
-            //SPEA2
             //PAES
+
+
             ExternalDoubleProblem p = builder.build();
 
             Algorithm<List<DoubleSolution>> algorithm = inputPaser.getAlgorithm(p);
 
             AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm).execute();
+
+
+            logger.addHeaderInfo(inputPaser.getMetaData());
+
+            logger.save();
 
             System.out.println(algorithm.getResult());
             System.out.println(algorithmRunner.getComputingTime());
@@ -44,6 +95,7 @@ public class main
 
             manager.setPath(System.getProperty("user.dir"));
             manager.closeSession();
+
 
         }
         catch (ParseException e)
