@@ -12,6 +12,10 @@ import java.util.*;
 
 public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
 {
+
+    final String generationNumber = "generationNumber";
+    final String evaluationNumber = "evaluationNumber";
+
     String fileName;
     int numberOfVariables;
     int numberOfObjectives;
@@ -19,18 +23,20 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
     IHeaderInfo data;
 
     Integer front;
+    Integer populationSize = 1;
 
     List<DoubleSolution> solutions = new ArrayList<>();
 
     public FileDoubleLogger(String fileName)
     {
-        this(fileName, null);
+        this(fileName, null, null);
     }
 
-    public FileDoubleLogger(String fileName, Integer front)
+    public FileDoubleLogger(String fileName, Integer front, Integer populationSize)
     {
         this.fileName = fileName;
         this.front = front;
+        this.populationSize = populationSize;
     }
 
     @Override
@@ -51,10 +57,23 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
         }
     }
 
+    int count = 0;
+    int generation = 1;
+
     @Override
     public void logSolution(DoubleSolution solution)
     {
+        this.count++;
         this.solutions.add(solution);
+
+        solution.setAttribute(this.generationNumber, this.generation);
+        solution.setAttribute(this.evaluationNumber, this.count);
+
+        if(this.populationSize==null || this.count%this.populationSize==0)
+        {
+            this.count=0;
+            this.generation++;
+        }
     }
 
     @Override
@@ -78,12 +97,10 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
             ls = this.solutions;
         }
 
-        int count = 0;
         StringBuilder b = new StringBuilder();
         for(DoubleSolution s : ls)
         {
-            count++;
-            b.append(count + ",");
+            b.append(s.getAttribute(this.generationNumber) + "," + s.getAttribute(this.evaluationNumber) + ",");
             for (int i = 0; i < s.getNumberOfVariables(); i++)
             {
                 b.append(s.getVariableValueString(i) + ",");
