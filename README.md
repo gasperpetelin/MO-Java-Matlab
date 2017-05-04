@@ -1,6 +1,57 @@
 # jMetal problem evaluation in Matlab
 
-### ZagonTest
+### Poganjanje glavne skripte
+
+Zastavice
+* -v - število spremenljivk (obvezen)
+* -o - število kriterijev (obvezen)
+* -pop - velikost populacije
+* -eval - število iteracij 
+* -name - ime problema
+* -p - pot do .m datoteke
+* -minL - seznam spodnjih mej spremenljivk
+* -maxL - seznam zgorjnjih mej spremenljivk
+* -minLA - spodnja meja za vse spremenljivke
+* -minLA - zgornja meja za vse spremenljivke
+* -cross - tip križanja
+* -mut - tip mutacije
+* -algo - tip algoritma
+* -print - izpis nastavitev programa
+
+Primer:
+-v 3 -o 3 -p matlabscripts -print 1 -pop 60 -eval 1000 -algo ibea -minLA -90 -maxLA 90 -cross null
+
+### Crossover
+
+| **Opcije**    | **Primer**    |
+| ------------- |---------------|
+| -cross blxalpha probability [alpha] | -cross blxalpha 0.7 13 |
+| -cross null | -cross null      |
+| -cross sby probability distribution_index | -cross sby 0.7 0.9 |
+
+### Mutation
+
+| **Opcije**    | **Primer**    |
+| ------------- |---------------|
+| -mut nonuniform probability perturbation max_iterations | -mut nonuniform 0.7 0.3 20 |
+| -mut null | -mut null |
+| -mut polynomial probability distribution_index | -mut polynomial 0.7 0.9 |
+| -mut simplerandom probability | -mut simplerandom 0.7 |
+| -mut uniform probability perturbation | -mut uniform 0.7 0.9 |
+
+### Algorithm
+
+| **Opcije**    |
+| ------------- |
+| -mut nsgaii |
+| -mut ibea |
+| -mut random |
+| -mut gde3 |
+
+
+
+
+### ScriptRunner
 
 Abstraktni razred MatlabManagerConfig predstavlja skupek podatkov, ki so 
 potrebni za vsak problem. Razred lahko dodatno razširimo za točno določene probleme,
@@ -49,7 +100,7 @@ se uporabijo za sestavo problema (število spremenljivke, limite, ...).
 
 ```java
 
-ExternalDoubleProblem p = new DoubleProblemBuilder(manager, "ZagonTest").build();
+ExternalDoubleProblem p = new DoubleProblemBuilder(manager, "ScriptRunner").build();
 
 ```
 
@@ -70,7 +121,7 @@ System.out.println(algorithmRunner.getComputingTime());
 manager.closeSession();
 ```
 
-Datoteka ZagonTest
+Datoteka ScriptRunner
 
 Skripta vsebuje razred, ki ima polja NumberOfVariables, NumberOfObjectives, Name in Limits, ki so
 definirana v MatlabManagerConfig. Ta polja se uporabijo za sestavo problema. 
@@ -79,7 +130,7 @@ Razred vsebuje tudi funkcijo evaluate, ki vrne vektor dolžine NumberOfObjective
 izračune posamezne rešitve.
 
 ```matlab
-classdef ZagonTest
+classdef ScriptRunner
    properties
       NumberOfVariables = 6
       NumberOfObjectives = 10
@@ -88,7 +139,7 @@ classdef ZagonTest
    end
    methods
 
-      function obj = ZagonTest()
+      function obj = ScriptRunner()
       end
       
       function o = evaluate(obj, solution)
