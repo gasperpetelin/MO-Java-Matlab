@@ -13,7 +13,7 @@ public class NullDoubleLogger implements IPopulationLogger<DoubleSolution>
     public void logSolution(DoubleSolution solution){}
 
     @Override
-    public void addHeaderInfo(IHeaderInfo info){}
+    public void addHeaderInfo(IAlgorithmInfo info){}
 
     @Override
     public void save(){}

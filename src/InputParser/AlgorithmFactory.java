@@ -1,6 +1,7 @@
 package InputParser;
 
 import Problems.ExternalDoubleProblem;
+import Problems.PopulationLogger.AlgorithmMetaData;
 import org.apache.commons.cli.ParseException;
 import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.algorithm.multiobjective.gde3.GDE3Builder;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class AlgorithmFactory
 {
-    public static Algorithm<List<DoubleSolution>> getAlgorithm(String type,
+    public static AlgorithmMetadataPair getAlgorithm(String type,
                                                                ExternalDoubleProblem problem,
                                                                CrossoverOperator<DoubleSolution> cross,
                                                                MutationOperator<DoubleSolution>mut,
@@ -25,47 +26,62 @@ public class AlgorithmFactory
                                                                int popSize) throws ParseException
     {
 
+        Algorithm<List<DoubleSolution>> algo = null;
 
         if(type != null)
         {
             switch (type)
             {
                 case "nsgaii":
-                    return new NSGAIIBuilder<>(problem, cross, mut)
+                    algo = new NSGAIIBuilder<>(problem, cross, mut)
                             .setMaxEvaluations(maxeval)
                             .setPopulationSize(popSize)
                             .build();
+                    break;
                 case "ibea":
-                    return new IBEABuilder(problem)
+                    algo = new IBEABuilder(problem)
                             .setArchiveSize(5)
                             .setCrossover(cross)
                             .setMutation(mut)
                             .setMaxEvaluations(maxeval)
                             .setPopulationSize(popSize)
                             .build();
+                    break;
                 case "random":
-                    return new RandomSearchBuilder(problem)
+                    algo = new RandomSearchBuilder(problem)
                             .setMaxEvaluations(maxeval)
                             .build();
+                    popSize = 1;
+                    break;
                 case "gde3":
-                    return new GDE3Builder(problem)
+                    algo = new GDE3Builder(problem)
                             .setPopulationSize(popSize)
                             .setMaxEvaluations(maxeval)
                             .build();
+                    break;
                 case "spea2":
-                    return new SPEA2Builder(problem, cross, mut)
-                            .setMaxIterations(maxeval)
+                    algo = new SPEA2Builder(problem, cross, mut)
+                            .setMaxIterations((int)Math.floor(maxeval/popSize))
                             .setPopulationSize(popSize)
                             .build();
+                    break;
                 case "paes":
-                    return new PAESBuilder(problem)
+                    algo = new PAESBuilder(problem)
                             .setMutationOperator(mut)
                             .setMaxEvaluations(maxeval)
+                            .setArchiveSize(popSize)
                             .build();
+                    break;
                 default:
                     throw new ParseException("No algorithm with name: " + type);
             }
         }
-        return null;
+        if(algo==null)
+            return null;
+
+        AlgorithmMetaData meta = new AlgorithmMetaData(algo, mut, cross, maxeval, popSize);
+        AlgorithmMetadataPair pair = new AlgorithmMetadataPair(algo, meta);
+
+        return pair;
     }
 }

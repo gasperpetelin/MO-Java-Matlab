@@ -1,7 +1,6 @@
 package Problems.PopulationLogger;
 
 import org.uma.jmetal.solution.DoubleSolution;
-import org.uma.jmetal.util.SolutionListUtils;
 import org.uma.jmetal.util.solutionattribute.impl.DominanceRanking;
 
 import java.io.BufferedWriter;
@@ -20,23 +19,21 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
     int numberOfVariables;
     int numberOfObjectives;
     boolean deleteFile = true;
-    IHeaderInfo data;
+    IAlgorithmInfo data;
 
     Integer front;
-    Integer populationSize = 1;
 
     List<DoubleSolution> solutions = new ArrayList<>();
 
     public FileDoubleLogger(String fileName)
     {
-        this(fileName, null, null);
+        this(fileName, null);
     }
 
-    public FileDoubleLogger(String fileName, Integer front, Integer populationSize)
+    public FileDoubleLogger(String fileName, Integer front)
     {
         this.fileName = fileName;
         this.front = front;
-        this.populationSize = populationSize;
     }
 
     @Override
@@ -69,7 +66,7 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
         solution.setAttribute(this.generationNumber, this.generation);
         solution.setAttribute(this.evaluationNumber, this.count);
 
-        if(this.populationSize==null || this.count%this.populationSize==0)
+        if(this.data==null || this.count%this.data.getPopulationSize()==0)
         {
             this.count=0;
             this.generation++;
@@ -77,7 +74,7 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
     }
 
     @Override
-    public void addHeaderInfo(IHeaderInfo info)
+    public void addHeaderInfo(IAlgorithmInfo info)
     {
         this.data = info;
     }

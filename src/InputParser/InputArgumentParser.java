@@ -241,14 +241,20 @@ public class InputArgumentParser
         int maxeval = this.getNumberOfEvaluations();
         int popSize = this.getPopulationSize();
 
-        Algorithm<List<DoubleSolution>> algorithm = AlgorithmFactory.getAlgorithm(cmd.getOptionValue("algo"), problem, cross, mut, maxeval, popSize);
 
-        if(algorithm==null)
-            algorithm = new NSGAIIBuilder<>(problem, cross, mut).build();
+        AlgorithmMetadataPair pair = AlgorithmFactory.getAlgorithm(cmd.getOptionValue("algo"), problem, cross, mut, maxeval, popSize);
 
-        this.metaData = new AlgorithmMetaData(algorithm, mut, cross);
+        Algorithm<List<DoubleSolution>> algo = null;
 
-        return algorithm;
+        if(pair==null)
+            algo = new NSGAIIBuilder<>(problem, cross, mut).build();
+        else
+            algo = pair.getAlgorithm();
+
+        this.metaData = pair.getMeta();
+        this.metaData.setAlgorithm(algo);
+
+        return algo;
     }
 
 }
