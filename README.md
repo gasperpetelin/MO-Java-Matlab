@@ -30,7 +30,7 @@ Primer:
 | ------------- |---------------|
 | -cross blxalpha probability [alpha] | -cross blxalpha 0.7 13 |
 | -cross null | -cross null      |
-| -cross sby probability distribution_index | -cross sby 0.7 0.9 |
+| -cross sbx probability distribution_index | -cross sbx 0.7 0.9 |
 
 ### Mutation
 
