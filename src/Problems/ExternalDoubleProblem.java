@@ -8,15 +8,12 @@ import org.uma.jmetal.problem.impl.AbstractDoubleProblem;
 import org.uma.jmetal.solution.DoubleSolution;
 import org.uma.jmetal.util.JMetalException;
 
-import java.io.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExternalDoubleProblem extends AbstractDoubleProblem
 {
     IPopulationLogger<DoubleSolution> logger;
-
     ISolutionEvaluation<DoubleSolution> evaluator;
 
     public ExternalDoubleProblem(ISolutionEvaluation<DoubleSolution> evaluator, String problemName, int numberOfVariables, int numberOfObjectives, List<Limit> limits)

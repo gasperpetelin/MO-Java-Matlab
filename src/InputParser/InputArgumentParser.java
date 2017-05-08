@@ -54,6 +54,23 @@ public class InputArgumentParser
         }
     }
 
+    public boolean saveOnlyResult() throws ParseException
+    {
+        String var = cmd.getOptionValue("result");
+        if(var == null)
+            return true;
+
+        switch (var)
+        {
+            case "0":
+                return false;
+            case "1":
+                return true;
+            default:
+                throw new ParseException("parameter -r should be 0 or 1");
+        }
+    }
+
     public int getNumberOfVariables() throws ParseException
     {
         return this.positiveIntEval(cmd.getOptionValue(InputOptions.fnNumberOfVariables), "v");
@@ -241,19 +258,21 @@ public class InputArgumentParser
         int maxeval = this.getNumberOfEvaluations();
         int popSize = this.getPopulationSize();
 
-
         AlgorithmMetadataPair pair = AlgorithmFactory.getAlgorithm(cmd.getOptionValue("algo"), problem, cross, mut, maxeval, popSize);
 
         Algorithm<List<DoubleSolution>> algo = null;
 
         if(pair==null)
-            algo = new NSGAIIBuilder<>(problem, cross, mut).build();
+        {
+            algo = new NSGAIIBuilder<>(problem, cross, mut).setPopulationSize(popSize).setMaxEvaluations(maxeval).build();
+            this.metaData = new AlgorithmMetaData(algo, mut, cross, maxeval, popSize);
+        }
         else
+        {
             algo = pair.getAlgorithm();
-
-        this.metaData = pair.getMeta();
+            this.metaData = pair.getMeta();
+        }
         this.metaData.setAlgorithm(algo);
-
         return algo;
     }
 

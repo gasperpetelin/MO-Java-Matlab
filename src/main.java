@@ -43,22 +43,27 @@ public class main
                     .setNumberOfVariables(inputPaser.getNumberOfVariables())
                     .setNumberOfObjectives(inputPaser.getNumberOfObjectives())
                     .setProblemName(inputPaser.getName())
-                    .addLimits(inputPaser.getLimits())
-                    .addLogger(logger);
+                    .addLimits(inputPaser.getLimits());
 
-
+            if(!inputPaser.saveOnlyResult())
+                builder.addLogger(logger);
 
             ExternalDoubleProblem p = builder.build();
             Algorithm<List<DoubleSolution>> algorithm = inputPaser.getAlgorithm(p);
             logger.addHeaderInfo(inputPaser.getMetaData());
-            AlgorithmRunner algorithmRunner = new AlgorithmRunner.Executor(algorithm).execute();
+            new AlgorithmRunner.Executor(algorithm).execute();
+
+
+            if(inputPaser.saveOnlyResult())
+            {
+                logger.init(inputPaser.getNumberOfVariables(), inputPaser.getNumberOfObjectives());
+                for (DoubleSolution s : algorithm.getResult())
+                {
+                    logger.logSolution(s);
+                }
+            }
 
             logger.save();
-
-            System.out.println(algorithm.getResult());
-            System.out.println(algorithmRunner.getComputingTime());
-            System.out.println(p.getName());
-
 
             manager.setPath(System.getProperty("user.dir"));
             manager.closeSession();
@@ -68,6 +73,11 @@ public class main
         catch (ParseException e)
         {
             System.err.println(e.getMessage());
+            System.exit(1);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
             System.exit(1);
         }
     }

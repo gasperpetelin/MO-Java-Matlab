@@ -1,9 +1,9 @@
 classdef ScriptRunner
    properties
-      NumberOfVariables = 3
-      NumberOfObjectives = 10
-      Name = 'Zagon'
-      Limits=[[-100,100];[-100,100];[-100,100];[-100,100];[-100,100];[-100,100]];
+      %NumberOfVariables = 3
+      %NumberOfObjectives = 10
+      %Name = 'Zagon'
+      %Limits=[[-100,100];[-100,100];[-100,100];[-100,100];[-100,100];[-100,100]];
    end
    methods
 
