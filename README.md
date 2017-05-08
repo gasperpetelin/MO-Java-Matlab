@@ -17,9 +17,12 @@ Zastavice
 * -mut - tip mutacije
 * -algo - tip algoritma
 * -print - izpis nastavitev programa
+* -file - datoteka v katero se zapišejo rezultati
+* -front - izbor rezultatov le v določeni fronti
+* -r - zapišemo le končne rezultate (1) ali vse populacije (0)
 
 Primer:
--v 3 -o 3 -p matlabscripts -print 1 -pop 60 -eval 1000 -algo ibea -minLA -90 -maxLA 90 -cross null
+-v 3 -o 3 -r 1 -p matlabscripts -print 1 -pop 60 -eval 1000 -algo ibea -minLA -90 -maxLA 90 -cross null -file "file name.txt" -front 0
 
 ### Crossover
 
@@ -27,7 +30,7 @@ Primer:
 | ------------- |---------------|
 | -cross blxalpha probability [alpha] | -cross blxalpha 0.7 13 |
 | -cross null | -cross null      |
-| -cross sby probability distribution_index | -cross sby 0.7 0.9 |
+| -cross sbx probability distribution_index | -cross sbx 0.7 0.9 |
 
 ### Mutation
 
@@ -43,10 +46,12 @@ Primer:
 
 | **Opcije**    |
 | ------------- |
-| -mut nsgaii |
-| -mut ibea |
-| -mut random |
-| -mut gde3 |
+| -algo nsgaii |
+| -algo ibea |
+| -algo random |
+| -algo gde3 |
+| -algo spea2 |
+| -algo paes |
 
 
 
