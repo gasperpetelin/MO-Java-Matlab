@@ -7,7 +7,10 @@ import Problems.PopulationLogger.NullDoubleLogger;
 import Problems.ProblemBuilders.DoubleProblemBuilder;
 import org.apache.commons.cli.ParseException;
 import org.uma.jmetal.algorithm.Algorithm;
+import org.uma.jmetal.operator.impl.mutation.UniformMutation;
+import org.uma.jmetal.problem.multiobjective.Kursawe;
 import org.uma.jmetal.solution.DoubleSolution;
+import org.uma.jmetal.solution.impl.DefaultDoubleSolution;
 import org.uma.jmetal.util.AlgorithmRunner;
 
 import java.util.List;

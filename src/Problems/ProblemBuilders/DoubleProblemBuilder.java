@@ -1,6 +1,7 @@
 package Problems.ProblemBuilders;
 
 
+import ConnectionManager.CommandExecutionException;
 import ConnectionManager.Implementations.DoubleMatlabManager;
 import ConnectionManager.ManagerInterfaces.ISolutionEvaluation;
 import Problems.ExternalDoubleProblem;
@@ -20,21 +21,19 @@ public class DoubleProblemBuilder extends AbstractProblemBuilder<DoubleMatlabMan
     IPopulationLogger<DoubleSolution> logger = new NullDoubleLogger();
     List<Limit> limits;
 
-    public ExternalDoubleProblem build()
+    public ExternalDoubleProblem build() throws CommandExecutionException
     {
         this.manager.newObject(this.problemName, this.toMatlabCode());
+
         if(this.overriddenNumberOfVariables<1)
-        {
             this.overriddenNumberOfVariables =  manager.getNumberOfVariables();
-        }
+
         if(this.overriddenNumberOfObjectives<1)
-        {
             this.overriddenNumberOfObjectives =  manager.getNumberOfObjectives();
-        }
+
         if(this.overriddenProblemName.equals(""))
-        {
             this.overriddenProblemName =  manager.getProblemName();
-        }
+
 
         if(this.limits==null)
             this.limits = manager.getLimits();

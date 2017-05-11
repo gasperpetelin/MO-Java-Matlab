@@ -7,6 +7,9 @@ public class InputOptions
 {
     public static final String swNumberOfVariables = "v"; public static final String fnNumberOfVariables = "variables";
     public static final String swNumberOfObjectives = "o"; public static final String fnNumberOfObjectives = "objectives";
+    public static final String swPopulationSize = "pop"; public static final String fnPopulationSize = "population";
+    public static final String swNumberOfEvaluations = "eval"; public static final String fnNumberOfEvaluations = "evaluations";
+    public static final String swProblemName = "name"; public static final String fnProblemName = "name";
 
     public static Options getOptions()
     {
@@ -20,14 +23,10 @@ public class InputOptions
         numberOfObjectives.setRequired(true);
         options.addOption(numberOfObjectives);
 
-        Option populationSize = new Option("pop", "population", true, "population size");
-        options.addOption(populationSize);
+        options.addOption(new Option(swPopulationSize, fnPopulationSize, true, "population size"));
+        options.addOption(new Option(swNumberOfEvaluations, fnNumberOfEvaluations, true, "number of evaluations"));
+        options.addOption(new Option(swProblemName, fnProblemName, true, "problem name"));
 
-        Option numberOfIterations = new Option("eval", "evaluations", true, "number of evaluations");
-        options.addOption(numberOfIterations);
-
-        Option problemName = new Option("name", "name", true, "problem name");
-        options.addOption(problemName);
 
         Option problemPath = new Option("p", "path", true, "path to problem directory");
         options.addOption(problemPath);

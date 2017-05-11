@@ -23,7 +23,7 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
 
 
     @Override
-    public void openSession()
+    public void openSession() throws CommandExecutionException
     {
         try
         {
@@ -32,7 +32,7 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
         }
         catch (MatlabConnectionException e)
         {
-            throw new JMetalException("Failed to open session", e);
+            throw new CommandExecutionException("Failed to open session", e);
         }
     }
 
@@ -45,20 +45,20 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
     }
 
     @Override
-    public void newObject(String objectName, String parameters)
+    public void newObject(String objectName, String parameters) throws CommandExecutionException
     {
         String command = this.config.getVariableName() + "=" + objectName + "(" + parameters +");";
         this.executeCommand(command);
     }
 
     @Override
-    public void setPath(String path)
+    public void setPath(String path) throws CommandExecutionException
     {
         this.executeCommand("cd " + path);
     }
 
     @Override
-    public int getNumberOfObjectives()
+    public int getNumberOfObjectives() throws CommandExecutionException
     {
         try
         {
@@ -68,12 +68,12 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
         }
         catch (MatlabInvocationException e)
         {
-            throw new JMetalException("Unable to get number of objectives", e);
+            throw new CommandExecutionException("Unable to get number of objectives", e);
         }
     }
 
     @Override
-    public int getNumberOfVariables()
+    public int getNumberOfVariables() throws CommandExecutionException
     {
         try
         {
@@ -83,12 +83,12 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
         }
         catch (MatlabInvocationException e)
         {
-            throw new JMetalException("Unable to get number of variables", e);
+            throw new CommandExecutionException("Unable to get number of variables", e);
         }
     }
 
     @Override
-    public String getProblemName()
+    public String getProblemName() throws CommandExecutionException
     {
         try
         {
@@ -98,11 +98,11 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
         }
         catch (MatlabInvocationException e)
         {
-            throw new JMetalException("Unable to get number of variables", e);
+            throw new CommandExecutionException("Unable to get number of variables", e);
         }
     }
 
-    protected void executeCommand(String command)
+    protected void executeCommand(String command) throws CommandExecutionException
     {
         try
         {
@@ -110,7 +110,7 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
         }
         catch (MatlabInvocationException e)
         {
-            throw new JMetalException("Failed to execute command", e);
+            throw new CommandExecutionException("Failed to execute command", e);
         }
     }
 
