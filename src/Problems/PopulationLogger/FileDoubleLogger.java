@@ -6,56 +6,40 @@ import org.uma.jmetal.util.solutionattribute.impl.DominanceRanking;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
+public class FileDoubleLogger extends AbstractDoubleLogger
 {
-
-    final String generationNumber = "generationNumber";
-    final String evaluationNumber = "evaluationNumber";
-
-    String fileName;
-    int numberOfVariables;
-    int numberOfObjectives;
     boolean deleteFile = true;
-    IAlgorithmInfo data;
-
-    Integer front;
 
     List<DoubleSolution> solutions = new ArrayList<>();
 
-    public FileDoubleLogger(String fileName)
+    public FileDoubleLogger(String fileName, String fileType)
     {
-        this(fileName, null);
+        super(fileName, fileType, null);
     }
 
-    public FileDoubleLogger(String fileName, Integer front)
+    public FileDoubleLogger(String fileName, String fileType, Integer front)
     {
-        this.fileName = fileName;
-        this.front = front;
+        super(fileName, fileType, front);
     }
 
-    @Override
-    public void init(int numberOfVariables, int numberOfObjectives)
-    {
-        this.numberOfVariables = numberOfVariables;
-        this.numberOfObjectives = numberOfObjectives;
-        this.deleteFile();
-    }
-
-    private void deleteFile()
+    private void deleteFile(Date date)
     {
         if(this.deleteFile)
         {
-            File file = new File(this.fileName);
+            File file = new File(getFileName(date));
             file.delete();
             this.deleteFile = false;
         }
     }
 
-    int count = 0;
-    int generation = 1;
+
 
     @Override
     public void logSolution(DoubleSolution solution)
@@ -74,19 +58,28 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
     }
 
     @Override
-    public void addHeaderInfo(IAlgorithmInfo info)
-    {
-        this.data = info;
-    }
-
-    @Override
     public void save()
     {
+        Date date = Calendar.getInstance().getTime();
+        this.deleteFile(date);
+
+
+        DominanceRanking<DoubleSolution> ranking = new DominanceRanking<>();
+        ranking.computeRanking(this.solutions);
+
+
+        for (int i = 0; i < ranking.getNumberOfSubfronts(); i++)
+        {
+            List<DoubleSolution> frontLs = ranking.getSubfront(i);
+            for (DoubleSolution s : frontLs)
+            {
+                s.setAttribute(frontNumber, i);
+            }
+        }
+
         List<DoubleSolution> ls;
         if(this.front != null)
         {
-            DominanceRanking<DoubleSolution> ranking = new DominanceRanking<>();
-            ranking.computeRanking(this.solutions);
             ls = ranking.getSubfront(this.front);
         }
         else
@@ -97,21 +90,11 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
         StringBuilder b = new StringBuilder();
         for(DoubleSolution s : ls)
         {
-            b.append(s.getAttribute(this.generationNumber) + "," + s.getAttribute(this.evaluationNumber) + ",");
-            for (int i = 0; i < s.getNumberOfVariables(); i++)
-            {
-                b.append(s.getVariableValueString(i) + ",");
-            }
-            for (int i = 0; i < s.getNumberOfObjectives(); i++)
-            {
-                b.append(s.getObjective(i) + ",");
-            }
-            b.deleteCharAt(b.length()-1);
-            b.append(System.lineSeparator());
+            b.append(this.formatSolution(s));
         }
 
         StringBuilder headerBuilder = new StringBuilder(this.numberOfVariables + "," +
-                this.numberOfObjectives + "," + LocalDateTime.now());
+                this.numberOfObjectives + "," + date);
 
         if(this.data!=null)
         {
@@ -120,7 +103,7 @@ public class FileDoubleLogger implements IPopulationLogger<DoubleSolution>
 
         try
         {
-            FileWriter fstream = new FileWriter(this.fileName,true);
+            FileWriter fstream = new FileWriter(getFileName(date),true);
             BufferedWriter fbw = new BufferedWriter(fstream);
             fbw.write(headerBuilder.toString());
             fbw.newLine();

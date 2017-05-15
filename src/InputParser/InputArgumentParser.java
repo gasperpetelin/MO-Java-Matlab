@@ -243,6 +243,11 @@ public class InputArgumentParser
         return name;
     }
 
+    public boolean getContinuousLogging()
+    {
+        return cmd.hasOption("con");
+    }
+
     public AlgorithmMetaData getMetaData() throws Exception
     {
         if(this.metaData == null)

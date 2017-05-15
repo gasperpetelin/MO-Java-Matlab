@@ -41,6 +41,12 @@ public class AlgorithmMetaData implements IAlgorithmInfo
     }
 
     @Override
+    public String getFileNameDetails()
+    {
+        return this.algo.getClass().getSimpleName();
+    }
+
+    @Override
     public int getNumberOfEvaluations()
     {
         return this.eval;

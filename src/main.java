@@ -1,7 +1,9 @@
+import ConnectionManager.CommandExecutionException;
 import ConnectionManager.Implementations.DoubleMatlabManager;
 import InputParser.InputArgumentParser;
 import Problems.ExternalDoubleProblem;
 import Problems.PopulationLogger.FileDoubleLogger;
+import Problems.PopulationLogger.FileDoubleRealTimeLogger;
 import Problems.PopulationLogger.IPopulationLogger;
 import Problems.PopulationLogger.NullDoubleLogger;
 import Problems.ProblemBuilders.DoubleProblemBuilder;
@@ -38,7 +40,13 @@ public class main
             }
             else
             {
-                logger = new FileDoubleLogger(inputPaser.getFileName(), inputPaser.getFront());
+                String[] arr = fileName.split("\\.(?=[^\\.]+$)");
+                if(arr.length!=2)
+                    throw new CommandExecutionException("Incorrect file name format.");
+                if(inputPaser.getContinuousLogging())
+                    logger = new FileDoubleRealTimeLogger(arr[0], arr[1], inputPaser.getFront());
+                else
+                    logger = new FileDoubleLogger(arr[0], arr[1], inputPaser.getFront());
             }
 
 

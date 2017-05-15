@@ -68,6 +68,9 @@ public class InputOptions
         Option onlyResult = new Option("r", "result", true, "save only result");
         options.addOption(onlyResult);
 
+        Option conlog = new Option("con", "con", false, "continuous writing to file");
+        options.addOption(conlog);
+
         return options;
     }
 }
