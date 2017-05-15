@@ -20,6 +20,7 @@ Zastavice
 * -file - datoteka v katero se zapišejo rezultati
 * -front - izbor rezultatov le v določeni fronti
 * -r - zapišemo le končne rezultate (1) ali vse populacije (0)
+* -con -sprotno pisanje v datoteko
 
 Primer:
 -v 3 -o 3 -r 1 -p matlabscripts -print 1 -pop 60 -eval 1000 -algo ibea -minLA -90 -maxLA 90 -cross null -file "file name.txt" -front 0
