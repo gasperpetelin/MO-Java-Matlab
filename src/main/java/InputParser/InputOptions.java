@@ -65,7 +65,7 @@ public class InputOptions
         Option front = new Option("front", "front", true, "front number");
         options.addOption(front);
 
-        Option onlyResult = new Option("r", "result", true, "save only result");
+        Option onlyResult = new Option("r", "result", false, "save only result");
         options.addOption(onlyResult);
 
         Option conlog = new Option("con", "con", false, "continuous writing to file");

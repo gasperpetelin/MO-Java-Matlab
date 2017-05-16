@@ -56,19 +56,7 @@ public class InputArgumentParser
 
     public boolean saveOnlyResult() throws ParseException
     {
-        String var = cmd.getOptionValue("result");
-        if(var == null)
-            return true;
-
-        switch (var)
-        {
-            case "0":
-                return false;
-            case "1":
-                return true;
-            default:
-                throw new ParseException("parameter -r should be 0 or 1");
-        }
+        return cmd.hasOption("result");
     }
 
     public int getNumberOfVariables() throws ParseException
@@ -253,7 +241,6 @@ public class InputArgumentParser
         if(this.metaData == null)
             throw new Exception("Algorithm not yet build");
         return this.metaData;
-
     }
 
     public Algorithm<List<DoubleSolution>> getAlgorithm(ExternalDoubleProblem problem) throws ParseException
