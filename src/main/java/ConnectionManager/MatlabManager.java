@@ -54,7 +54,14 @@ public abstract class MatlabManager<C extends MatlabManagerConfig> implements IM
     @Override
     public void setPath(String path) throws CommandExecutionException
     {
-        this.executeCommand("cd " + path);
+        try
+        {
+            this.executeCommand("cd " + path);
+        }
+        catch(CommandExecutionException e)
+        {
+            throw new CommandExecutionException("Failed to move to directory: " + path, e);
+        }
     }
 
     @Override

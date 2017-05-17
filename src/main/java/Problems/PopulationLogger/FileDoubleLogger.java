@@ -6,8 +6,6 @@ import org.uma.jmetal.util.solutionattribute.impl.DominanceRanking;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,8 +37,6 @@ public class FileDoubleLogger extends AbstractDoubleLogger
         }
     }
 
-
-
     @Override
     public void logSolution(DoubleSolution solution)
     {
@@ -49,7 +45,6 @@ public class FileDoubleLogger extends AbstractDoubleLogger
 
         solution.setAttribute(this.generationNumber, this.generation);
         solution.setAttribute(this.evaluationNumber, this.count);
-
         if(this.data==null || this.count%this.data.getPopulationSize()==0)
         {
             this.count=0;
@@ -63,29 +58,8 @@ public class FileDoubleLogger extends AbstractDoubleLogger
         Date date = Calendar.getInstance().getTime();
         this.deleteFile(date);
 
-
-        DominanceRanking<DoubleSolution> ranking = new DominanceRanking<>();
-        ranking.computeRanking(this.solutions);
-
-
-        for (int i = 0; i < ranking.getNumberOfSubfronts(); i++)
-        {
-            List<DoubleSolution> frontLs = ranking.getSubfront(i);
-            for (DoubleSolution s : frontLs)
-            {
-                s.setAttribute(frontNumber, i);
-            }
-        }
-
-        List<DoubleSolution> ls;
-        if(this.front != null)
-        {
-            ls = ranking.getSubfront(this.front);
-        }
-        else
-        {
-            ls = this.solutions;
-        }
+        List<List<DoubleSolution>> generations = this.arrangeInFronts(this.solutions);
+        List<DoubleSolution> ls = this.computeSolutionFront(generations);
 
         StringBuilder b = new StringBuilder();
         for(DoubleSolution s : ls)

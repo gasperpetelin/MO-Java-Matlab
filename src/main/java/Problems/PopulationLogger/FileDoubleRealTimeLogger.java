@@ -23,7 +23,6 @@ public class FileDoubleRealTimeLogger extends AbstractDoubleLogger
 
     Date beginWriteDate = null;
     boolean writeHeader = true;
-
     String fullFileName = null;
 
     @Override
@@ -71,20 +70,23 @@ public class FileDoubleRealTimeLogger extends AbstractDoubleLogger
 
         if(this.data==null || this.count%this.data.getPopulationSize()==0)
         {
+
+
+
+
             this.count=0;
             this.generation++;
         }
     }
 
-    @Override
-    public void save()
+    private List<DoubleSolution> getSolutionsFromFile()
     {
         int numberOfVariables = 0;
         int numberOfObjectives = 0;
         boolean header = true;
         List<DoubleSolution> ls = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fullFileName))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(this.fullFileName))) {
             String line;
             while((line = br.readLine()) != null)
             {
@@ -109,8 +111,8 @@ public class FileDoubleRealTimeLogger extends AbstractDoubleLogger
                         obj[i] = Double.parseDouble(arr[i+3+numberOfVariables]);
                     }
                     DoubleSolution s = new SolutionSort(vars, obj);
-                    s.setAttribute(generationNumber, arr[0]);
-                    s.setAttribute(evaluationNumber, arr[1]);
+                    s.setAttribute(generationNumber, Integer.parseInt(arr[0]));
+                    s.setAttribute(evaluationNumber, Integer.parseInt(arr[1]));
                     ls.add(s);
                 }
             }
@@ -118,35 +120,33 @@ public class FileDoubleRealTimeLogger extends AbstractDoubleLogger
         {
             System.out.println("Error: " + e.getMessage());
         }
+        return ls;
+    }
 
 
-        DominanceRanking<DoubleSolution> ranking = new DominanceRanking<>();
-        ranking.computeRanking(ls);
-        for (int i = 0; i < ranking.getNumberOfSubfronts(); i++)
-        {
-            List<DoubleSolution> frontLs = ranking.getSubfront(i);
-            for (DoubleSolution s : frontLs)
-            {
-                s.setAttribute(frontNumber, i);
-            }
-        }
-        if(this.front != null)
-        {
-            ls = ranking.getSubfront(this.front);
-        }
+
+    private void updateFronts()
+    {
+
+    }
+
+    @Override
+    public void save()
+    {
+        List<DoubleSolution> ls = this.getSolutionsFromFile();
+        List<List<DoubleSolution>> generations =  this.arrangeInFronts(ls);
+        List<DoubleSolution> lsFronts = this.computeSolutionFront(generations);
 
         this.deleteFile(this.beginWriteDate);
 
         StringBuilder b = new StringBuilder();
-        for(DoubleSolution s : ls)
+        for(DoubleSolution s : lsFronts)
         {
             b.append(this.formatSolution(s));
         }
 
         StringBuilder headerBuilder = new StringBuilder(this.numberOfVariables + "," +
                 this.numberOfObjectives + "," + beginWriteDate);
-
-
 
         if(this.data!=null)
         {

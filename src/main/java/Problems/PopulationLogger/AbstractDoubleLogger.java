@@ -1,11 +1,13 @@
 package Problems.PopulationLogger;
 
 import org.uma.jmetal.solution.DoubleSolution;
+import org.uma.jmetal.util.solutionattribute.impl.DominanceRanking;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public abstract class AbstractDoubleLogger implements IPopulationLogger<DoubleSolution>
 {
@@ -69,6 +71,49 @@ public abstract class AbstractDoubleLogger implements IPopulationLogger<DoubleSo
     public void addHeaderInfo(IAlgorithmInfo info)
     {
         this.data = info;
+    }
+
+    protected List<List<DoubleSolution>> arrangeInFronts(List<DoubleSolution> solutions)
+    {
+        List<List<DoubleSolution>> generations = new ArrayList<>();
+        for(int i = 1; i < this.generation; i++)
+        {
+            generations.add(new ArrayList<DoubleSolution>());
+        }
+        for(DoubleSolution ds:solutions)
+        {
+            int gen = (int)ds.getAttribute(this.generationNumber);
+            generations.get(gen-1).add(ds);
+        }
+        return generations;
+    }
+
+    protected List<DoubleSolution> computeSolutionFront(List<List<DoubleSolution>> generations)
+    {
+        List<DoubleSolution> ls = new ArrayList<>();
+        for (List<DoubleSolution> pop:generations)
+        {
+            DominanceRanking<DoubleSolution> ranking = new DominanceRanking<>();
+            ranking.computeRanking(pop);
+
+            for (int i = 0; i < ranking.getNumberOfSubfronts(); i++)
+            {
+                List<DoubleSolution> frontLs = ranking.getSubfront(i);
+                for (DoubleSolution s : frontLs)
+                {
+                    s.setAttribute(frontNumber, i);
+
+                    if(this.front==null)
+                        ls.add(s);
+                    else
+                    {
+                        if(this.front == i)
+                            ls.add(s);
+                    }
+                }
+            }
+        }
+        return ls;
     }
 
 }

@@ -10,8 +10,12 @@ import Problems.ProblemBuilders.DoubleProblemBuilder;
 import org.apache.commons.cli.ParseException;
 import org.uma.jmetal.algorithm.Algorithm;
 import org.uma.jmetal.operator.impl.mutation.UniformMutation;
+import org.uma.jmetal.problem.Problem;
+import org.uma.jmetal.problem.multiobjective.Fonseca;
 import org.uma.jmetal.problem.multiobjective.Kursawe;
+import org.uma.jmetal.problem.multiobjective.Viennet2;
 import org.uma.jmetal.solution.DoubleSolution;
+import org.uma.jmetal.solution.Solution;
 import org.uma.jmetal.solution.impl.DefaultDoubleSolution;
 import org.uma.jmetal.util.AlgorithmRunner;
 
@@ -21,6 +25,13 @@ public class main
 {
     public static void main(String [] args) throws Exception
     {
+        //Problem pr = new Fonseca();
+        //DoubleSolution d = (DoubleSolution) pr.createSolution();
+        //d.setVariableValue(0, -1.3);
+        //d.setVariableValue(1, 1.5);
+        //d.setVariableValue(2, 1.2);
+        //pr.evaluate(d);
+
         try
         {
             InputArgumentParser inputPaser = new InputArgumentParser(args);
