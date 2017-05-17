@@ -19,7 +19,7 @@ Zastavice
 * -print - izpis nastavitev programa
 * -file - datoteka v katero se zapišejo rezultati
 * -front - izbor rezultatov le v določeni fronti
-* -r - zapišemo le končne rezultate (1) ali vse populacije (0)
+* -r - zapišemo le končne rezultate
 * -con -sprotno pisanje v datoteko
 
 Primer:
