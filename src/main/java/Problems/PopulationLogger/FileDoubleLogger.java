@@ -67,7 +67,7 @@ public class FileDoubleLogger extends AbstractDoubleLogger
             b.append(this.formatSolution(s));
         }
 
-        StringBuilder headerBuilder = new StringBuilder(this.numberOfVariables + "," +
+        StringBuilder headerBuilder = new StringBuilder("#" + this.numberOfVariables + "," +
                 this.numberOfObjectives + "," + date);
 
         if(this.data!=null)
