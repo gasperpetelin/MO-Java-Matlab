@@ -49,6 +49,8 @@ public class ExternalDoubleProblem extends AbstractDoubleProblem
     public void evaluate(DoubleSolution solution)
     {
         double[] objectives = evaluator.getSolution(solution);
+
+
         if(objectives.length<this.getNumberOfObjectives())
             throw new JMetalException("Evaluation function should return at least " + this.getNumberOfObjectives() + " objectives.");
 
